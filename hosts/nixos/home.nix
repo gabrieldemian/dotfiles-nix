@@ -1,14 +1,11 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ../../modules/home-manager/zsh.nix
     ../../modules/home-manager/hyprland/default.nix
     ../../modules/home-manager/waybar.nix
     ../../modules/home-manager/kitty.nix
     ../../modules/home-manager/dunst.nix
+    ../../modules/home-manager/nixvim/default.nix
   ];
 
   zsh.enable = true;
@@ -16,6 +13,7 @@
   waybar.enable = true;
   kitty.enable = true;
   dunst.enable = true;
+  nixvim.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -36,8 +34,9 @@
     packages = with pkgs; [
       # fix screen sharing
       xdg-desktop-portal-hyprland
-      kitty
       swww
+      anyrun
+      gnome.nautilus
     ];
   };
 

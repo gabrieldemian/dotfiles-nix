@@ -56,7 +56,7 @@ in {
     ];
     shellAliases = {
       "docker-clean" = "docker system prune --all -f --volumes";
-      nvim = "nix run ~/.config/nixvim";
+      # nvim = "nix run ~/.config/nixvim";
     };
   };
 }

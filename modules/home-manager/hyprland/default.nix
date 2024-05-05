@@ -11,20 +11,23 @@ in {
     enable = mkEnableOption "enable hyprland";
   };
 
+  # config.services.xserver = mkIf cfg.enable {
+  #   displayManager.gdm.enable = true;
+  #   displayManager.gdm.wayland = true;
+  # };
+
+  # config.programs.wofi.enable = mkIf cfg.enable true;
+
   config.wayland.windowManager.hyprland = mkIf cfg.enable {
     enable = true;
     xwayland.enable = true;
-    # services.xserver = {
-    #   displayManager.gdm.enable = true;
-    #   displayManager.gdm.wayland = true;
-    # };
     settings = {
       monitor = "eDP-1,2560x1600,auto,1";
       exec-once = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP & dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
 
       "$terminal" = "kitty";
       "$fileManager" = "nautilus";
-      "$menu" = "wofi";
+      "$menu" = "anyrun";
       "$mainMod" = "SUPER";
 
       env = ["XCURSOR_SIZE,24" "WLR_DRM_NO_ATOMIC,1"];
@@ -110,7 +113,7 @@ in {
         "$mainMod, Return, exec, $terminal"
         "$mainMod, W, killactive"
         "$mainMod, M, exit"
-        "$mainMod, Space, exec, $menu --show drun"
+        "$mainMod, Space, exec, $menu"
         "$mainMod, E, exec, [float;center;size 45% 45%] $fileManager"
         # floating terminal
         "$mainMod SHIFT, Return, exec, [float;center;size 45% 35%] kitty"

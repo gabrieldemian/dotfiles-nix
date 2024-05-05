@@ -51,7 +51,6 @@
       isNormalUser = true;
       description = "gabriel";
       extraGroups = ["networkmanager" "wheel" "video" "input" "audio" "docker"];
-      packages = with pkgs; [];
       shell = pkgs.zsh;
     };
 
@@ -63,9 +62,9 @@
   nixpkgs.config.allowUnfree = true;
 
   environment = {
-    variables = {
-      EDITOR = "nvim";
-    };
+    # variables = {
+    #   EDITOR = "nvim";
+    # };
     sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";
@@ -78,9 +77,8 @@
   };
 
   programs = {
-    light.enable = true;
-    neovim.defaultEditor = true;
     zsh.enable = true;
+    light.enable = true;
     mtr.enable = true;
     gnupg.agent = {
       enable = true;
@@ -106,14 +104,6 @@
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
   };
-
-  # List services that you want to enable:
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   services.pipewire = {
     enable = true;
@@ -144,11 +134,8 @@
     # essential
     brave
     firefox
-    wofi
-    dunst
     vim
     wget
-    neovim
     git
     neofetch
     lolcat
