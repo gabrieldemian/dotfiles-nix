@@ -10,14 +10,21 @@ in {
   imports = [
     ./starship.nix
   ];
-  # starship.enable = true;
+
+  config.starship.enable = mkDefault true;
 
   options.zsh = {
     enable = mkEnableOption "enable zsh module";
-    # starship.enable = mkOption {
-    #   type = types.bool;
-    #   default = true;
-    # };
+  };
+
+  config.home.packages = with pkgs;
+    mkIf cfg.enable [
+      zoxide
+    ];
+
+  config.programs.zoxide = mkIf cfg.enable {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   config.programs.zsh = mkIf cfg.enable {

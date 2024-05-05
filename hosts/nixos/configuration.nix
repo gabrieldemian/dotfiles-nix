@@ -86,11 +86,6 @@
       enable = true;
       enableSSHSupport = true;
     };
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-    };
-    waybar.enable = true;
   };
 
   virtualisation.docker.enable = true;
@@ -130,8 +125,6 @@
   services.xserver = {
     videoDrivers = ["nvidia"];
     enable = true;
-    displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = true;
     xkb.layout = "us";
     xkb.variant = "";
   };
@@ -151,9 +144,6 @@
     # essential
     brave
     firefox
-    kitty
-    waybar
-    swww
     wofi
     dunst
     vim
@@ -162,7 +152,6 @@
     git
     neofetch
     lolcat
-    starship
     zathura
     mpv
     wl-clipboard
@@ -175,15 +164,11 @@
     pwvucontrol
     nix-prefetch-git
 
-    # fix screen sharing
-    xdg-desktop-portal-hyprland
-
     # cli tools for dev
     htop
     bottom
     ripgrep
     bat
-    zoxide
     cargo-tauri
     direnv
     yarn

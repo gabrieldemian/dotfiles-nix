@@ -5,10 +5,17 @@
 }: {
   imports = [
     ../../modules/home-manager/zsh.nix
+    ../../modules/home-manager/hyprland/default.nix
+    ../../modules/home-manager/waybar.nix
+    ../../modules/home-manager/kitty.nix
+    ../../modules/home-manager/dunst.nix
   ];
 
   zsh.enable = true;
-  starship.enable = true;
+  hyprland.enable = true;
+  waybar.enable = true;
+  kitty.enable = true;
+  dunst.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -27,16 +34,15 @@
     stateVersion = "23.11";
 
     packages = with pkgs; [
-      zoxide
+      # fix screen sharing
+      xdg-desktop-portal-hyprland
+      kitty
+      swww
     ];
   };
 
   programs = {
     home-manager.enable = true;
-
-    zoxide.enable = true;
-    zoxide.enableZshIntegration = true;
-
     direnv.enable = true;
     direnv.enableZshIntegration = true;
   };
