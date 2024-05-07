@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   config.programs.nixvim = {
     extraPlugins = with pkgs.vimPlugins; [
-      nvim-surround
       plenary-nvim
       telescope-file-browser-nvim
       telescope-ui-select-nvim
@@ -26,8 +25,6 @@
       local function telescope_buffer_dir()
         return vim.fn.expand("%:p:h")
       end
-
-      require("nvim-surround").setup()
 
       Map("n", "<leader>lg", ": LazyGit<cr>")
 

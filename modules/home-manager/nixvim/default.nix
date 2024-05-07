@@ -32,7 +32,13 @@ in {
 
   config.programs.nixvim = mkIf cfg.enable {
     enable = true;
+
+    # plugins that don't deserve their own module
     plugins = {
+      indent-blankline.enable = true;
+      gitsigns.enable = true;
+      surround.enable = true;
+      nvim-autopairs.enable = true;
       treesitter.enable = true;
       autoclose.enable = true;
       comment.enable = true;
@@ -52,8 +58,8 @@ in {
         };
       };
       illuminate = {
-        enable = false;
-        underCursor = false;
+        enable = true;
+        underCursor = true;
         filetypesDenylist = [
           "DressingSelect"
           "Outline"
