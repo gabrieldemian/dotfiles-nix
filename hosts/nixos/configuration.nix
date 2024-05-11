@@ -3,15 +3,18 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/battery-notifier.nix
+    ../../modules/nixos/lemurs.nix
     inputs.home-manager.nixosModules.default
   ];
 
   battery-notifier.enable = true;
+  lemurs.enable = true;
 
   boot = {
     loader = {
@@ -53,7 +56,7 @@
     users.gabriel = {
       isNormalUser = true;
       description = "gabriel";
-      extraGroups = ["networkmanager" "wheel" "video" "input" "audio" "docker"];
+      extraGroups = ["networkmanager" "wheel" "video" "input" "audio" "docker" "adm"];
       shell = pkgs.zsh;
     };
 
@@ -114,12 +117,15 @@
     };
 
     xserver = {
+      # for some reason this is enabled by default
+      displayManager.lightdm.enable = lib.mkForce false;
+      autorun = false;
       videoDrivers = ["nvidia"];
       enable = true;
       xkb.layout = "us";
       xkb.variant = "";
-      displayManager.gdm.enable = true;
-      displayManager.gdm.wayland = true;
+      # displayManager.gdm.enable = true;
+      # displayManager.gdm.wayland = true;
     };
   };
 
@@ -164,7 +170,6 @@
     direnv
     yarn
     unzip
-    # nodejs_21
     lazygit
 
     # rust
