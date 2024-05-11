@@ -7,8 +7,11 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/nixos/battery-notifier.nix
     inputs.home-manager.nixosModules.default
   ];
+
+  battery-notifier.enable = true;
 
   boot = {
     loader = {
