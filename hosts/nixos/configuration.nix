@@ -62,9 +62,6 @@
   nixpkgs.config.allowUnfree = true;
 
   environment = {
-    # variables = {
-    #   EDITOR = "nvim";
-    # };
     sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";
@@ -101,22 +98,26 @@
       powerManagement.enable = true;
       open = false;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
   };
 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
+  services = {
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
 
-  services.xserver = {
-    videoDrivers = ["nvidia"];
-    enable = true;
-    xkb.layout = "us";
-    xkb.variant = "";
+    xserver = {
+      videoDrivers = ["nvidia"];
+      enable = true;
+      xkb.layout = "us";
+      xkb.variant = "";
+      displayManager.gdm.enable = true;
+      displayManager.gdm.wayland = true;
+    };
   };
 
   fonts.packages = with pkgs; [

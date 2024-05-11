@@ -121,5 +121,47 @@
       key = "TT";
       action = ":TransparentToggle<cr>";
     }
+    # zenmode keys
+    {
+      key = "<C-w>o";
+      action = ":Zen<cr>";
+      options.silent = true;
+    }
+    # gitsigns keys
+    {
+      key = "<leader>gs";
+      action = ":Gitsigns stage_hunk<cr>";
+      options.silent = true;
+    }
+    {
+      key = "<leader>gS";
+      action = ":Gitsigns stage_buffer<cr>";
+      options.silent = true;
+    }
+    {
+      key = "<leader>gu";
+      action = ":Gitsigns undo_stage_hunk<cr>";
+      options.silent = true;
+    }
+    {
+      key = "<leader>gr";
+      action = ":Gitsigns reset_buffer<cr>";
+      options.silent = true;
+    }
+    {
+      key = "<leader>gp";
+      action = ":Gitsigns preview_hunk<cr>";
+      options.silent = true;
+    }
+    {
+      key = "<leader>gd";
+      action = ":Gitsigns diffthis<cr>";
+      options.silent = true;
+    }
+    {
+      mode = ["o" "x"];
+      key = "<leader>gh";
+      action = ":<C-U>Gitsigns select_hunk<cr>";
+    }
   ];
 }

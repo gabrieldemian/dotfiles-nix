@@ -63,7 +63,7 @@
     cmp-cmdline.enable = false;
     cmp = {
       enable = true;
-      autoEnableSources = true;
+      autoEnableSources = false;
       settings = {
         experimental = {
           ghost_text = true;

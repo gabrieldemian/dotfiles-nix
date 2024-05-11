@@ -11,24 +11,18 @@ in {
     enable = mkEnableOption "enable hyprland";
   };
 
-  # config.services.xserver = mkIf cfg.enable {
-  #   displayManager.gdm.enable = true;
-  #   displayManager.gdm.wayland = true;
-  # };
-
-  # config.programs.wofi.enable = mkIf cfg.enable true;
-
   config.wayland.windowManager.hyprland = mkIf cfg.enable {
     enable = true;
     xwayland.enable = true;
     settings = {
       monitor = "eDP-1,2560x1600,auto,1";
-      exec-once = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP & dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
+      # exec-once = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP & dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
+      exec-once = "dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
 
       "$terminal" = "kitty";
       "$fileManager" = "nautilus";
       "$menu" = "anyrun";
-      "$mainMod" = "SUPER";
+      "$mod" = "SUPER";
 
       env = ["XCURSOR_SIZE,24" "WLR_DRM_NO_ATOMIC,1"];
 
@@ -104,73 +98,68 @@ in {
       ];
 
       bindm = [
-        "$mainMod, mouse:272, movewindow"
-        "$mainMod, mouse:273, resizewindow"
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
       ];
 
-      bind = [
-        # essential
-        "$mainMod, Return, exec, $terminal"
-        "$mainMod, W, killactive"
-        "$mainMod, M, exit"
-        "$mainMod, Space, exec, $menu"
-        "$mainMod, E, exec, [float;center;size 45% 45%] $fileManager"
-        # floating terminal
-        "$mainMod SHIFT, Return, exec, [float;center;size 45% 35%] kitty"
-        #volume
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l '1.0' @DEFAULT_AUDIO_SINK@ 6%+"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume -l '1.0' @DEFAULT_AUDIO_SINK@ 6%-"
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-        # toggles
-        "$mainMod, P, pseudo," # dwindle
-        "$mainMod, V, togglefloating,"
-        "$mainMod, T, togglesplit," # dwindle
-        "$mainMod, F, fullscreen,"
-        # switch
-        "$mainMod SHIFT, h, swapwindow, l"
-        "$mainMod SHIFT, l, swapwindow, r"
-        "$mainMod SHIFT, j, swapwindow, d"
-        "$mainMod SHIFT, k, swapwindow, u"
-        # move focus with mainMod + hjkl
-        "$mainMod, h, movefocus, l"
-        "$mainMod, l, movefocus, r"
-        "$mainMod, k, movefocus, u"
-        "$mainMod, j, movefocus, d"
-        # Switch workspaces with mainMod + [0-9]
-        "$mainMod, 1, workspace, 1"
-        "$mainMod, 2, workspace, 2"
-        "$mainMod, 3, workspace, 3"
-        "$mainMod, 4, workspace, 4"
-        "$mainMod, 5, workspace, 5"
-        "$mainMod, 6, workspace, 6"
-        "$mainMod, 7, workspace, 7"
-        "$mainMod, 8, workspace, 8"
-        "$mainMod, 9, workspace, 9"
-        "$mainMod, 0, workspace, 10"
-        # Move active window to a workspace with mainMod + SHIFT + [0-9]
-        "$mainMod SHIFT, 1, movetoworkspace, 1"
-        "$mainMod SHIFT, 2, movetoworkspace, 2"
-        "$mainMod SHIFT, 3, movetoworkspace, 3"
-        "$mainMod SHIFT, 4, movetoworkspace, 4"
-        "$mainMod SHIFT, 5, movetoworkspace, 5"
-        "$mainMod SHIFT, 6, movetoworkspace, 6"
-        "$mainMod SHIFT, 7, movetoworkspace, 7"
-        "$mainMod SHIFT, 8, movetoworkspace, 8"
-        "$mainMod SHIFT, 9, movetoworkspace, 9"
-        "$mainMod SHIFT, 0, movetoworkspace, 10"
-        # Light
-        ",code:232,exec,light -U 5"
-        ",code:233,exec,light -A 5"
-        # Example special workspace (scratchpad)
-        "$mainMod, S, togglespecialworkspace, magic"
-        "$mainMod SHIFT, S, movetoworkspace, special:magic"
-        # Scroll through existing workspaces with mainMod + scroll
-        "$mainMod, mouse_down, workspace, e+1"
-        "$mainMod, mouse_up, workspace, e-1"
-        # Toggle game mode to disable animations
-        "$mainMod CTRL SHIFT, 0, exec, ~/dotfiles/modules/home-manager/hyprland/scripts/gamemode.sh"
-      ];
+      bind =
+        [
+          # essential
+          "$mod, Return, exec, $terminal"
+          "$mod, W, killactive"
+          "$mod, M, exit"
+          "$mod, Space, exec, $menu"
+          "$mod, E, exec, [float;center;size 45% 45%] $fileManager"
+          # floating terminal
+          "$mod SHIFT, Return, exec, [float;center;size 45% 35%] kitty"
+          #volume
+          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l '1.0' @DEFAULT_AUDIO_SINK@ 6%+"
+          ", XF86AudioLowerVolume, exec, wpctl set-volume -l '1.0' @DEFAULT_AUDIO_SINK@ 6%-"
+          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+          # toggles
+          "$mod, P, pseudo," # dwindle
+          "$mod, V, togglefloating,"
+          "$mod, T, togglesplit," # dwindle
+          "$mod, F, fullscreen,"
+          # switch
+          "$mod SHIFT, h, swapwindow, l"
+          "$mod SHIFT, l, swapwindow, r"
+          "$mod SHIFT, j, swapwindow, d"
+          "$mod SHIFT, k, swapwindow, u"
+          # move focus with mod + hjkl
+          "$mod, h, movefocus, l"
+          "$mod, l, movefocus, r"
+          "$mod, k, movefocus, u"
+          "$mod, j, movefocus, d"
+          # Light
+          ",code:232,exec,light -U 5"
+          ",code:233,exec,light -A 5"
+          # Example special workspace (scratchpad)
+          "$mod, S, togglespecialworkspace, magic"
+          "$mod SHIFT, S, movetoworkspace, special:magic"
+          # Scroll through existing workspaces with mod + scroll
+          "$mod, mouse_down, workspace, e+1"
+          "$mod, mouse_up, workspace, e-1"
+          # Toggle game mode to disable animations
+          "$mod CTRL SHIFT, 0, exec, ~/dotfiles/modules/home-manager/hyprland/scripts/gamemode.sh"
+        ]
+        ++ (
+          # workspaces
+          # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
+          builtins.concatLists (builtins.genList (
+              x: let
+                ws = let
+                  c = (x + 1) / 10;
+                in
+                  builtins.toString (x + 1 - (c * 10));
+              in [
+                "$mod, ${ws}, workspace, ${toString (x + 1)}"
+                "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+              ]
+            )
+            10)
+        );
     };
   };
 }

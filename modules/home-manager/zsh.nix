@@ -11,11 +11,11 @@ in {
     ./starship.nix
   ];
 
-  config.starship.enable = mkDefault true;
-
   options.zsh = {
     enable = mkEnableOption "enable zsh module";
   };
+
+  config.starship.enable = mkDefault true;
 
   config.home.packages = with pkgs;
     mkIf cfg.enable [
@@ -55,8 +55,13 @@ in {
       }
     ];
     shellAliases = {
+      nrs = "sudo nixos-rebuild switch --flake ~/dotfiles";
       "docker-clean" = "docker system prune --all -f --volumes";
-      # nvim = "nix run ~/.config/nixvim";
+      gc = "git commit -m";
+      gca = "git commit -a -m";
+      gp = "git push origin HEAD";
+      gpu = "git pull origin";
+      glog = "git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit";
     };
   };
 }
