@@ -12,12 +12,11 @@ in {
   };
 
   # Regularly check battery status
-  config.systemd.user.services.batterynotifier = mkIf cfg.enable {
+  config.systemd.user.services.battery-notifier = mkIf cfg.enable {
     enable = true;
     description = "Battery notifier";
     wants = ["display-manager.service"];
     wantedBy = ["graphical-session.target"];
-    # wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       type = "notify";
     };

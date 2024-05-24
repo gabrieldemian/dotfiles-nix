@@ -5,9 +5,11 @@
     ../../modules/home-manager/waybar.nix
     ../../modules/home-manager/kitty.nix
     ../../modules/home-manager/dunst.nix
+    ../../modules/home-manager/gtk.nix
     ../../modules/home-manager/nixvim/default.nix
   ];
 
+  gtkk.enable = true;
   zsh.enable = true;
   hyprland.enable = true;
   waybar.enable = true;
@@ -31,39 +33,12 @@
     # changes in each release.
     stateVersion = "23.11";
 
-    # pointerCursor = {
-    #   gtk.enable = true;
-    #   package = pkgs.bibata-cursors;
-    #   name = "Bibata-Modern-Classic";
-    #   size = 16;
-    # };
-
     packages = with pkgs; [
-      # fix screen sharing
       xdg-desktop-portal-hyprland
       swww
       anyrun
       gnome.nautilus
     ];
-  };
-
-  # fixing pointer
-  gtk = {
-    enable = true;
-    # theme = {
-    #   package = pkgs.flat-remix-gtk;
-    #   name = "Flat-Remix-GTK-Grey-Darkest";
-    # };
-    #
-    # iconTheme = {
-    #   package = pkgs.gnome.adwaita-icon-theme;
-    #   name = "Adwaita";
-    # };
-    #
-    # font = {
-    #   name = "Sans";
-    #   size = 11;
-    # };
   };
 
   programs = {

@@ -1,28 +1,34 @@
 # Help is available in the configuration.nix(5) man page
 {
+  lib,
   config,
   pkgs,
   inputs,
-  lib,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/battery-notifier.nix
-    ../../modules/nixos/lemurs.nix
     inputs.home-manager.nixosModules.default
   ];
 
   battery-notifier.enable = true;
-  lemurs.enable = true;
 
   boot = {
+    blacklistedKernelModules = ["nouveau"];
+    initrd.kernelModules = ["nvidia"];
+    kernelPackages = pkgs.linuxPackages_6_9;
+    extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
     loader = {
       systemd-boot.enable = true;
+      # grub = {
+      # configurationLimit = 5;
+      #   enable = true;
+      #   efiSupport = true;
+      #   device = "nodev";
+      # };
       efi.canTouchEfiVariables = true;
     };
-    #kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
-    #kernelParams = [ "acpi_backlight=video" ];
   };
 
   networking = {
@@ -56,7 +62,16 @@
     users.gabriel = {
       isNormalUser = true;
       description = "gabriel";
-      extraGroups = ["networkmanager" "wheel" "video" "input" "audio" "docker" "adm"];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "video"
+        "input"
+        "audio"
+        "docker"
+        "adm"
+        "plugdev"
+      ];
       shell = pkgs.zsh;
     };
 
@@ -67,10 +82,54 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # xdg.portal = {
+  #   enable = true;
+  #   wlr.enable = true;
+  #   extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  #   config = {
+  #     common = {
+  #       default = [
+  #         "gtk"
+  #       ];
+  #     };
+  #     pantheon = {
+  #       default = [
+  #         "pantheon"
+  #         "gtk"
+  #       ];
+  #       "org.freedesktop.impl.portal.Secret" = [
+  #         "gnome-keyring"
+  #       ];
+  #     };
+  #     x-cinnamon = {
+  #       default = [
+  #         "xapp"
+  #         "gtk"
+  #       ];
+  #     };
+  #   };
+  # };
+
   environment = {
     sessionVariables = {
-      WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";
+      GBM_BACKEND = "nvidia-drm";
+      __GL_GSYNC_ALLOWED = "0";
+      __GL_VRR_ALLOWED = "0";
+      DISABLE_QT5_COMPAT = "0";
+      ANKI_WAYLAND = "1";
+      DIRENV_LOG_FORMAT = "";
+      WLR_DRM_NO_ATOMIC = "1";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      QT_QPA_PLATFORM = "wayland";
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      QT_QPA_PLATFORMTHEME = "qt5ct";
+      MOZ_ENABLE_WAYLAND = "1";
+      WLR_BACKEND = "vulkan";
+      WLR_NO_HARDWARE_CURSORS = "1";
+      XDG_SESSION_TYPE = "wayland";
+      CLUTTER_BACKEND = "wayland";
+      # WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
     };
   };
 
@@ -82,7 +141,8 @@
   programs = {
     zsh.enable = true;
     light.enable = true;
-    mtr.enable = true;
+    dconf.enable = true;
+    # mtr.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
@@ -91,7 +151,10 @@
 
   virtualisation.docker.enable = true;
 
-  security.rtkit.enable = true;
+  security = {
+    rtkit.enable = true;
+    polkit.enable = true;
+  };
 
   hardware = {
     opengl = {
@@ -103,30 +166,47 @@
       modesetting.enable = true;
       powerManagement.enable = true;
       open = false;
-      nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.beta;
+      prime = {
+        intelBusId = "PCI:00:02:0";
+        nvidiaBusId = "PCI:01:00:0";
+      };
     };
   };
 
   services = {
+    # dbus.enable = true;
     pipewire = {
       enable = true;
-      alsa.enable = true;
       alsa.support32Bit = true;
+      alsa.enable = true;
       pulse.enable = true;
+      wireplumber.enable = true;
     };
 
     xserver = {
       # for some reason this is enabled by default
       displayManager.lightdm.enable = lib.mkForce false;
-      autorun = false;
+      # displayManager.gdm.enable = true;
+      # desktopManager.gnome.enable = true;
+      # autorun = false;
       videoDrivers = ["nvidia"];
       enable = true;
       xkb.layout = "us";
-      xkb.variant = "";
-      # displayManager.gdm.enable = true;
-      # displayManager.gdm.wayland = true;
+      # √(2560² + 1600²) px / 16 in ≃ 189 dpi
+      dpi = 189;
     };
+
+    udev.extraRules = ''
+      # HW.1, Nano
+      SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="1b7c|2b7c|3b7c|4b7c", TAG+="uaccess", TAG+="udev-acl"
+
+      # Blue, NanoS, Aramis, HW.2, Nano X, NanoSP, Stax, Ledger Test,
+      SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", TAG+="uaccess", TAG+="udev-acl"
+
+      # Same, but with hidraw-based library (instead of libusb)
+      KERNEL=="hidraw*", ATTRS{idVendor}=="2c97", MODE="0666"
+    '';
   };
 
   fonts.packages = with pkgs; [
@@ -160,6 +240,7 @@
     wireplumber
     pwvucontrol
     nix-prefetch-git
+    killall
 
     # cli tools for dev
     htop
@@ -175,6 +256,15 @@
     # rust
     cargo
     rustc
+
+    ledger-live-desktop
+    transmission-gtk
+
+    # screenshare
+    # xwaylandvideobridge
+    # xdg-desktop-portal
+    # xdg-desktop-portal-wlr
+    # xdg-desktop-portal-hyprland
   ];
 
   system.stateVersion = "23.11";

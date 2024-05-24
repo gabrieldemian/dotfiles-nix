@@ -14,17 +14,28 @@ in {
   config.wayland.windowManager.hyprland = mkIf cfg.enable {
     enable = true;
     xwayland.enable = true;
+
+    # Whether to enable hyprland-session.target on hyprland startup
+    systemd.enable = true;
+
     settings = {
       monitor = "eDP-1,2560x1600,auto,1";
-      # exec-once = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP & dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
-      exec-once = "dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
+      exec-once = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP & dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
+      # exec-once = "dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
 
       "$terminal" = "kitty";
       "$fileManager" = "nautilus";
       "$menu" = "anyrun";
       "$mod" = "SUPER";
 
-      env = ["XCURSOR_SIZE,24" "WLR_DRM_NO_ATOMIC,1"];
+      env = [
+        "XCURSOR_SIZE,24"
+        "XDG_SESSION_TYPE,wayland"
+        "GBM_BACKEND,nvidia-drm"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        # "WLR_DRM_NO_ATOMIC,1"
+        "ELECTRON_OZONE_PLATFORM_HINT,auto"
+      ];
 
       input = {
         kb_layout = "us";
@@ -40,19 +51,15 @@ in {
         gaps_in = 8;
         gaps_out = 12;
         border_size = 4;
-        # col = {
-        #   active_border = "rgba(c6a0f6ee) rgba(ed8796ee) 45deg";
-        #   inactive_border = "transparent";
-        # };
+        "col.active_border" = "rgba(c6a0f6ee) rgba(ed8796ee) 45deg";
+        "col.inactive_border" = "transparent";
         layout = "dwindle";
         apply_sens_to_raw = 0; # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
       };
 
       decoration = {
-        # col = {
-        #   shadow = "rgba (1 a1a1aee)";
-        #   shadow_inactive = "rgba(22000000)";
-        # };
+        "col.shadow" = "rgba(1a1a1aee)";
+        "col.shadow_inactive" = "rgba(22000000)";
         rounding = 10;
         blur = {
           enabled = true;

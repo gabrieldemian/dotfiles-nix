@@ -62,6 +62,7 @@ in {
       gp = "git push origin HEAD";
       gpu = "git pull origin";
       glog = "git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit";
+      nix-clean = "sudo nix-collect-garbage --delete-older-than";
     };
   };
 }
