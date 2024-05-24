@@ -13,15 +13,17 @@ in {
 
   config.wayland.windowManager.hyprland = mkIf cfg.enable {
     enable = true;
-    xwayland.enable = true;
+    xwayland = {
+      enable = true;
+    };
 
     # Whether to enable hyprland-session.target on hyprland startup
-    systemd.enable = true;
+    # systemd.enable = true;
 
     settings = {
       monitor = "eDP-1,2560x1600,auto,1";
-      exec-once = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP & dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
-      # exec-once = "dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
+      # exec-once = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP & dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
+      exec-once = "dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
 
       "$terminal" = "kitty";
       "$fileManager" = "nautilus";
@@ -33,7 +35,8 @@ in {
         "XDG_SESSION_TYPE,wayland"
         "GBM_BACKEND,nvidia-drm"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        # "WLR_DRM_NO_ATOMIC,1"
+        "LIBVA_DRIVER_NAME,nvidia"
+        "WLR_DRM_NO_ATOMIC,1"
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
       ];
 
@@ -47,7 +50,7 @@ in {
       };
 
       general = {
-        allow_tearing = true;
+        allow_tearing = false;
         gaps_in = 8;
         gaps_out = 12;
         border_size = 4;

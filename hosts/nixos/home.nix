@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   imports = [
+    # catppuccin.homeManagerModules.catppuccin
     ../../modules/home-manager/zsh.nix
     ../../modules/home-manager/hyprland/default.nix
     ../../modules/home-manager/waybar.nix
@@ -34,7 +35,8 @@
     stateVersion = "23.11";
 
     packages = with pkgs; [
-      xdg-desktop-portal-hyprland
+      # xdg-desktop-portal-hyprland
+      # xdg-desktop-portal-gtk
       swww
       anyrun
       gnome.nautilus

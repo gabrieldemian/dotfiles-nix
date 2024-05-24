@@ -16,8 +16,8 @@
 
   boot = {
     blacklistedKernelModules = ["nouveau"];
-    initrd.kernelModules = ["nvidia"];
-    kernelPackages = pkgs.linuxPackages_6_9;
+    # initrd.kernelModules = ["nvidia"];
+    kernelPackages = pkgs.linuxPackages_6_8;
     extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
     loader = {
       systemd-boot.enable = true;
@@ -82,54 +82,59 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # xdg.portal = {
-  #   enable = true;
-  #   wlr.enable = true;
-  #   extraPortals = [pkgs.xdg-desktop-portal-gtk];
-  #   config = {
-  #     common = {
-  #       default = [
-  #         "gtk"
-  #       ];
-  #     };
-  #     pantheon = {
-  #       default = [
-  #         "pantheon"
-  #         "gtk"
-  #       ];
-  #       "org.freedesktop.impl.portal.Secret" = [
-  #         "gnome-keyring"
-  #       ];
-  #     };
-  #     x-cinnamon = {
-  #       default = [
-  #         "xapp"
-  #         "gtk"
-  #       ];
-  #     };
-  #   };
-  # };
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
+    ];
+    config = {
+      common = {
+        default = [
+          "gtk"
+        ];
+      };
+      pantheon = {
+        default = [
+          "pantheon"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.Secret" = [
+          "gnome-keyring"
+        ];
+      };
+      x-cinnamon = {
+        default = [
+          "xapp"
+          "gtk"
+        ];
+      };
+    };
+  };
 
   environment = {
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
-      GBM_BACKEND = "nvidia-drm";
-      __GL_GSYNC_ALLOWED = "0";
-      __GL_VRR_ALLOWED = "0";
-      DISABLE_QT5_COMPAT = "0";
-      ANKI_WAYLAND = "1";
-      DIRENV_LOG_FORMAT = "";
-      WLR_DRM_NO_ATOMIC = "1";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      QT_QPA_PLATFORM = "wayland";
-      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-      QT_QPA_PLATFORMTHEME = "qt5ct";
-      MOZ_ENABLE_WAYLAND = "1";
-      WLR_BACKEND = "vulkan";
-      WLR_NO_HARDWARE_CURSORS = "1";
-      XDG_SESSION_TYPE = "wayland";
-      CLUTTER_BACKEND = "wayland";
-      # WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
+      # GBM_BACKEND = "nvidia-drm";
+      # __GL_GSYNC_ALLOWED = "0";
+      # __GL_VRR_ALLOWED = "0";
+      # DISABLE_QT5_COMPAT = "0";
+      # ANKI_WAYLAND = "1";
+      # DIRENV_LOG_FORMAT = "";
+      # WLR_DRM_NO_ATOMIC = "1";
+      # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      # GTK_USE_PORTAL = "1";
+      # QT_QPA_PLATFORM = "wayland";
+      # QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      # QT_QPA_PLATFORMTHEME = "qt5ct";
+      # MOZ_ENABLE_WAYLAND = "1";
+      # WLR_BACKEND = "vulkan";
+      # WLR_NO_HARDWARE_CURSORS = "1";
+      # XDG_SESSION_TYPE = "wayland";
+      # CLUTTER_BACKEND = "wayland";
+      # # WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
     };
   };
 
@@ -158,15 +163,40 @@
 
   hardware = {
     opengl = {
+      # extraPackages = with pkgs; [
+      #   vaapiVdpau
+      #   libvdpau-va-gl
+      # ];
+      # setLdLibraryPath = true;
+      # extraPackages32 = with pkgs.pkgsi686Linux; [libva];
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
     };
     nvidia = {
+      nvidiaSettings = true;
       modesetting.enable = true;
       powerManagement.enable = true;
+      powerManagement.finegrained = false;
       open = false;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      # package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+        version = "555.42.02";
+        sha256_64bit = "sha256-k7cI3ZDlKp4mT46jMkLaIrc2YUx1lh1wj/J4SVSHWyk=";
+        sha256_aarch64 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
+        openSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
+        settingsSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
+        persistencedSha256 = lib.fakeSha256;
+      };
+      # package = config.boot.kernelPackages.nvidiaPackages.beta.overrideAttrs {
+      #   version = "555.42.02";
+      #   src =
+      #     pkgs.fetchurl
+      #     {
+      #       url = "https://download.nvidia.com/XFree86/Linux-x86_64/555.42.02/NVIDIA-Linux-x86_64-555.42.02.run";
+      #       sha256 = "";
+      #     };
+      # };
       prime = {
         intelBusId = "PCI:00:02:0";
         nvidiaBusId = "PCI:01:00:0";
@@ -175,7 +205,7 @@
   };
 
   services = {
-    # dbus.enable = true;
+    dbus.enable = true;
     pipewire = {
       enable = true;
       alsa.support32Bit = true;
@@ -184,13 +214,26 @@
       wireplumber.enable = true;
     };
 
+    greetd = {
+      enable = true;
+      settings = rec {
+        initial_session = {
+          command = "${pkgs.hyprland}/bin/hyprland";
+          user = "gabriel";
+        };
+        default_session = initial_session;
+      };
+    };
+
     xserver = {
       # for some reason this is enabled by default
       displayManager.lightdm.enable = lib.mkForce false;
-      # displayManager.gdm.enable = true;
-      # desktopManager.gnome.enable = true;
+      # displayManager.gdm = {
+      #   enable = true;
+      #   wayland = true;
+      # };
       # autorun = false;
-      videoDrivers = ["nvidia"];
+      videoDrivers = ["nvidiaBeta"];
       enable = true;
       xkb.layout = "us";
       # √(2560² + 1600²) px / 16 in ≃ 189 dpi
@@ -219,6 +262,12 @@
     fira-code-symbols
     mplus-outline-fonts.githubRelease
   ];
+
+  environment.etc."greetd/environments".text = ''
+    hyprland
+    bash
+    zsh
+  '';
 
   environment.systemPackages = with pkgs; [
     # essential
@@ -262,9 +311,10 @@
 
     # screenshare
     # xwaylandvideobridge
-    # xdg-desktop-portal
-    # xdg-desktop-portal-wlr
-    # xdg-desktop-portal-hyprland
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-wlr
+    xdg-desktop-portal-hyprland
   ];
 
   system.stateVersion = "23.11";
