@@ -25,6 +25,9 @@
   config.programs.nixvim.plugins.lsp = {
     enable = true;
     servers = {
+      ltex = {
+        enable = true;
+      };
       rust-analyzer = {
         enable = false;
         installCargo = true;

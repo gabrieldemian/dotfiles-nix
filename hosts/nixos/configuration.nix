@@ -16,7 +16,7 @@
 
   boot = {
     blacklistedKernelModules = ["nouveau"];
-    # initrd.kernelModules = ["nvidia"];
+    initrd.kernelModules = ["nvidia"];
     kernelPackages = pkgs.linuxPackages_6_8;
     extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
     loader = {
@@ -179,15 +179,15 @@
       powerManagement.enable = true;
       powerManagement.finegrained = false;
       open = false;
-      # package = config.boot.kernelPackages.nvidiaPackages.beta;
-      package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-        version = "555.42.02";
-        sha256_64bit = "sha256-k7cI3ZDlKp4mT46jMkLaIrc2YUx1lh1wj/J4SVSHWyk=";
-        sha256_aarch64 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
-        openSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
-        settingsSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
-        persistencedSha256 = lib.fakeSha256;
-      };
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      # package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+      #   version = "555.42.02";
+      #   sha256_64bit = "sha256-k7cI3ZDlKp4mT46jMkLaIrc2YUx1lh1wj/J4SVSHWyk=";
+      #   sha256_aarch64 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
+      #   openSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
+      #   settingsSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
+      #   persistencedSha256 = lib.fakeSha256;
+      # };
       # package = config.boot.kernelPackages.nvidiaPackages.beta.overrideAttrs {
       #   version = "555.42.02";
       #   src =
@@ -197,10 +197,10 @@
       #       sha256 = "";
       #     };
       # };
-      prime = {
-        intelBusId = "PCI:00:02:0";
-        nvidiaBusId = "PCI:01:00:0";
-      };
+      # prime = {
+      #   intelBusId = "PCI:00:02:0";
+      #   nvidiaBusId = "PCI:01:00:0";
+      # };
     };
   };
 
@@ -292,6 +292,7 @@
     killall
 
     # cli tools for dev
+    bun
     htop
     bottom
     ripgrep
@@ -301,6 +302,9 @@
     yarn
     unzip
     lazygit
+    gum
+    glow
+    tealdeer
 
     # rust
     cargo

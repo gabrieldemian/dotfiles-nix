@@ -159,6 +159,11 @@
       options.silent = true;
     }
     {
+      key = "<leader>gb";
+      action = ":Gitsigns blame_line<cr>";
+      options.silent = true;
+    }
+    {
       mode = ["o" "x"];
       key = "<leader>gh";
       action = ":<C-U>Gitsigns select_hunk<cr>";

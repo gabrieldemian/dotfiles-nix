@@ -35,6 +35,7 @@ in {
 
     # plugins that don't deserve their own module
     plugins = {
+      texpresso.enable = true;
       indent-blankline.enable = true;
       gitsigns.enable = true;
       surround.enable = true;
