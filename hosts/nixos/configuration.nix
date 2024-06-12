@@ -15,7 +15,7 @@
   battery-notifier.enable = true;
 
   boot = {
-    blacklistedKernelModules = ["nouveau"];
+    blacklistedKernelModules = ["nouveau" "bluetooth" "btusb"];
     initrd.kernelModules = ["nvidia"];
     kernelPackages = pkgs.linuxPackages_6_8;
     extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
@@ -32,9 +32,7 @@
   };
 
   networking = {
-    hostName = "nixos"; # Define your hostname.
-    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    # Enable networking
+    hostName = "nixos";
     networkmanager.enable = true;
   };
 
@@ -115,26 +113,11 @@
   };
 
   environment = {
+    variables = {
+      EDITOR = "nvim";
+    };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
-      # GBM_BACKEND = "nvidia-drm";
-      # __GL_GSYNC_ALLOWED = "0";
-      # __GL_VRR_ALLOWED = "0";
-      # DISABLE_QT5_COMPAT = "0";
-      # ANKI_WAYLAND = "1";
-      # DIRENV_LOG_FORMAT = "";
-      # WLR_DRM_NO_ATOMIC = "1";
-      # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      # GTK_USE_PORTAL = "1";
-      # QT_QPA_PLATFORM = "wayland";
-      # QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-      # QT_QPA_PLATFORMTHEME = "qt5ct";
-      # MOZ_ENABLE_WAYLAND = "1";
-      # WLR_BACKEND = "vulkan";
-      # WLR_NO_HARDWARE_CURSORS = "1";
-      # XDG_SESSION_TYPE = "wayland";
-      # CLUTTER_BACKEND = "wayland";
-      # # WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
     };
   };
 
@@ -145,6 +128,8 @@
 
   programs = {
     zsh.enable = true;
+    # enable running unpatched dynamic binaries
+    nix-ld.enable = true;
     light.enable = true;
     dconf.enable = true;
     # mtr.enable = true;
@@ -163,12 +148,6 @@
 
   hardware = {
     opengl = {
-      # extraPackages = with pkgs; [
-      #   vaapiVdpau
-      #   libvdpau-va-gl
-      # ];
-      # setLdLibraryPath = true;
-      # extraPackages32 = with pkgs.pkgsi686Linux; [libva];
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
@@ -180,27 +159,6 @@
       powerManagement.finegrained = false;
       open = false;
       package = config.boot.kernelPackages.nvidiaPackages.beta;
-      # package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-      #   version = "555.42.02";
-      #   sha256_64bit = "sha256-k7cI3ZDlKp4mT46jMkLaIrc2YUx1lh1wj/J4SVSHWyk=";
-      #   sha256_aarch64 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
-      #   openSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
-      #   settingsSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
-      #   persistencedSha256 = lib.fakeSha256;
-      # };
-      # package = config.boot.kernelPackages.nvidiaPackages.beta.overrideAttrs {
-      #   version = "555.42.02";
-      #   src =
-      #     pkgs.fetchurl
-      #     {
-      #       url = "https://download.nvidia.com/XFree86/Linux-x86_64/555.42.02/NVIDIA-Linux-x86_64-555.42.02.run";
-      #       sha256 = "";
-      #     };
-      # };
-      # prime = {
-      #   intelBusId = "PCI:00:02:0";
-      #   nvidiaBusId = "PCI:01:00:0";
-      # };
     };
   };
 
@@ -298,7 +256,6 @@
     bottom
     ripgrep
     bat
-    cargo-tauri
     direnv
     yarn
     unzip
@@ -308,6 +265,7 @@
     tealdeer
 
     # rust
+    rustup
     cargo
     rustc
 
@@ -315,7 +273,6 @@
     transmission-gtk
 
     # screenshare
-    # xwaylandvideobridge
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     xdg-desktop-portal-wlr

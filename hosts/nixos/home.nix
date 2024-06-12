@@ -23,6 +23,7 @@
   home = {
     username = "gabriel";
     homeDirectory = "/home/gabriel";
+    sessionPath = [ "$HOME/.cargo/bin" ];
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage

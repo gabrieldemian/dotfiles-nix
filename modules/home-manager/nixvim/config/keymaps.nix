@@ -1,5 +1,26 @@
 {config, ...}: {
   config.programs.nixvim.keymaps = [
+    # move in insert mode with hjkl
+    {
+      mode = ["i" "c"];
+      key = "<C-h>";
+      action = "<Left>";
+    }
+    {
+      mode = ["i" "c"];
+      key = "<C-j>";
+      action = "<Down>";
+    }
+    {
+      mode = ["i" "c"];
+      key = "<C-k>";
+      action = "<Up>";
+    }
+    {
+      mode = ["i" "c"];
+      key = "<C-l>";
+      action = "<Right>";
+    }
     # keep cursor in place
     {
       mode = "x";
@@ -91,7 +112,7 @@
       action = "<cmd>Lspsaga hover_doc<cr>";
     }
     {
-      mode = ["v" "i" "n"];
+      mode = ["x"];
       key = "<C-k>";
       action = "<cmd>lua vim.lsp.buf.signature_help<cr>";
     }
@@ -120,6 +141,7 @@
     {
       key = "TT";
       action = ":TransparentToggle<cr>";
+      options.silent = true;
     }
     # zenmode keys
     {
@@ -134,13 +156,13 @@
       options.silent = true;
     }
     {
-      key = "<leader>gS";
-      action = ":Gitsigns stage_buffer<cr>";
+      key = "<leader>gu";
+      action = ":Gitsigns undo_stage_hunk<cr>";
       options.silent = true;
     }
     {
-      key = "<leader>gu";
-      action = ":Gitsigns undo_stage_hunk<cr>";
+      key = "<leader>gS";
+      action = ":Gitsigns stage_buffer<cr>";
       options.silent = true;
     }
     {
@@ -159,14 +181,15 @@
       options.silent = true;
     }
     {
-      key = "<leader>gb";
-      action = ":Gitsigns blame_line<cr>";
-      options.silent = true;
-    }
-    {
       mode = ["o" "x"];
       key = "<leader>gh";
       action = ":<C-U>Gitsigns select_hunk<cr>";
+    }
+    # oil
+    {
+      key = "<leader>-";
+      action = ":Oil<cr>";
+      options.silent = true;
     }
   ];
 }
