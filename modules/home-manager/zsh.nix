@@ -54,7 +54,7 @@ in {
         };
       }
     ];
-    
+
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/dotfiles";
       "docker-clean" = "docker system prune --all -f --volumes";
@@ -62,7 +62,9 @@ in {
       gca = "git commit -a -m";
       gp = "git push origin HEAD";
       gpu = "git pull origin";
+      adog = "git log --all --decorate --oneline --graph";
       glog = "git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit";
+      glog2 = "git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all";
       nix-clean = "sudo nix-collect-garbage --delete-older-than";
     };
   };

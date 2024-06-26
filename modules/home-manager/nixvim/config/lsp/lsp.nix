@@ -97,6 +97,7 @@
         };
       };
       eslint = {enable = true;};
+      bashls = {enable = true;};
       pyright = {enable = true;};
       ruff-lsp = {enable = true;};
     };
