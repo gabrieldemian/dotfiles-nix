@@ -147,11 +147,8 @@
   };
 
   hardware = {
-    opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-    };
+    graphics.enable = true;
+    graphics.enable32Bit = true;
     nvidia = {
       nvidiaSettings = true;
       modesetting.enable = true;
@@ -173,7 +170,7 @@
     };
 
     greetd = {
-      enable = true;
+      enable = false;
       settings = rec {
         initial_session = {
           command = "${pkgs.hyprland}/bin/hyprland";
@@ -186,11 +183,6 @@
     xserver = {
       # for some reason this is enabled by default
       displayManager.lightdm.enable = lib.mkForce false;
-      # displayManager.gdm = {
-      #   enable = true;
-      #   wayland = true;
-      # };
-      # autorun = false;
       videoDrivers = ["nvidiaBeta"];
       enable = true;
       xkb.layout = "us";
@@ -270,7 +262,7 @@
     rustc
 
     ledger-live-desktop
-    transmission-gtk
+    transmission_4-gtk
 
     # screenshare
     xdg-desktop-portal

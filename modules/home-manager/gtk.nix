@@ -19,29 +19,14 @@ in {
   config = mkIf cfg.enable {
     gtk = {
       enable = true;
-      catppuccin = {
-        enable = true;
-        flavor = "mocha";
-        accent = "pink";
-        size = "standard";
-        tweaks = ["normal"];
-      };
-
+      theme.name = "Catppuccin";
       iconTheme = {
         package = pkgs.catppuccin-papirus-folders;
         name = "Papirus";
       };
-      # font = {
-      #   name = "Lexend";
-      #   size = 11;
-      # };
     };
     home = {
       packages = with pkgs; [
-        # qt5.qttools
-        # qt6Packages.qtstyleplugin-kvantum
-        # libsForQt5.qtstyleplugin-kvantum
-        # libsForQt5.qt5ct
         breeze-icons
       ];
       pointerCursor = {
@@ -56,17 +41,6 @@ in {
         GTK_USE_PORTAL = "1";
       };
     };
-    # qt = {
-    #   enable = false;
-    #   platformTheme.name = "qtct";
-    #   style = {
-    #     name = "Catppuccin-Frappe-Dark";
-    #     package = pkgs.catppuccin-kde.override {
-    #       flavour = ["frappe"];
-    #       accents = ["pink"];
-    #     };
-    #   };
-    # };
     xdg.configFile = {
       "Kvantum/catppuccin/catppuccin.kvconfig".source = builtins.fetchurl {
         url = "https://raw.githubusercontent.com/catppuccin/Kvantum/main/src/Catppuccin-Frappe-Pink/Catppuccin-Frappe-Pink.kvconfig";

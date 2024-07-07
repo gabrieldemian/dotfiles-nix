@@ -40,7 +40,7 @@
       # xdg-desktop-portal-gtk
       swww
       anyrun
-      gnome.nautilus
+      nautilus
     ];
   };
 

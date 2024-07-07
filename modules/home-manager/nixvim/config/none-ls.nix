@@ -2,7 +2,7 @@
   config.programs.nixvim.plugins.none-ls = {
     enable = true;
     enableLspFormat = false;
-    updateInInsert = false;
+    settings.update_in_insert = false;
     # onAttach = ''
     #   function(client, bufnr)
     #       if client.supports_method "textDocument/formatting" then
