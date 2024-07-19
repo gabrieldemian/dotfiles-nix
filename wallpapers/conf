@@ -1,0 +1,9 @@
+allow_images=true
+hide_scroll=false
+image_size=500
+width=600
+height=600
+hide_search=true
+orientation=vertical
+halign=center
+valign=start

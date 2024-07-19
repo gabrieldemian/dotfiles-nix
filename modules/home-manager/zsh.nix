@@ -56,6 +56,7 @@ in {
     ];
 
     shellAliases = {
+      spf = "superfile";
       nrs = "sudo nixos-rebuild switch --flake ~/dotfiles";
       "docker-clean" = "docker system prune --all -f --volumes";
       gc = "git commit -m";

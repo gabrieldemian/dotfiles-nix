@@ -31,6 +31,11 @@
     };
   };
 
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+  };
+
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
@@ -139,7 +144,12 @@
     };
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker.rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
 
   security = {
     rtkit.enable = true;
@@ -241,14 +251,13 @@
     nix-prefetch-git
     killall
     texliveFull
+    imv # image viewer
+    superfile
 
     # cli tools for dev
     bun
     htop
     bottom
-    ripgrep
-    bat
-    direnv
     yarn
     unzip
     lazygit

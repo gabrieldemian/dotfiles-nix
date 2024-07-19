@@ -33,15 +33,25 @@ in {
   config.programs.nixvim = mkIf cfg.enable {
     enable = true;
 
-    # plugins that don't deserve their own module
+    # plugins that dont deserve their own module
     plugins = {
       # TeXpresso %
+      floaterm.enable = true;
       texpresso.enable = true;
       indent-blankline.enable = true;
       gitsigns.enable = true;
       surround.enable = true;
       nvim-autopairs.enable = true;
-      treesitter.enable = true;
+      treesitter = {
+        enable = true;
+        ensureInstalled = [
+          "rust"
+          "asm"
+          "bash"
+          "typescript"
+          "c"
+        ];
+      };
       autoclose.enable = true;
       comment.enable = true;
       nvim-colorizer.enable = true;

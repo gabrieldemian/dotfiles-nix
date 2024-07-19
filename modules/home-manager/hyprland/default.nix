@@ -27,11 +27,12 @@ in {
 
       "$terminal" = "kitty";
       "$fileManager" = "nautilus";
-      "$menu" = "anyrun";
+      "$menu" = "wofi";
       "$mod" = "SUPER";
 
       env = [
         "XCURSOR_SIZE,24"
+        "HYPRCURSOR_SIZE,24"
         "XDG_SESSION_TYPE,wayland"
         "GBM_BACKEND,nvidia-drm"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
@@ -118,7 +119,7 @@ in {
           "$mod, Return, exec, $terminal"
           "$mod, W, killactive"
           "$mod, M, exit"
-          "$mod, Space, exec, $menu"
+          "$mod, Space, exec, $menu --show drun"
           "$mod, E, exec, [float;center;size 45% 45%] $fileManager"
           # floating terminal
           "$mod SHIFT, Return, exec, [float;center;size 45% 35%] kitty"

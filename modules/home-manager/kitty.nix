@@ -22,7 +22,7 @@ in {
       window_padding_width = 5;
 
       # background_blur 10
-      background_opacity = "0.9";
+      background_opacity = "0.4";
 
       # The basic colors
       foreground = "#CAD3F5";

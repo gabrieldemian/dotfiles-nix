@@ -58,6 +58,7 @@
       mode = "n";
       key = "WW";
       action = ":w!<enter>";
+      options.silent = true;
     }
     {
       mode = "n";
@@ -189,6 +190,12 @@
     {
       key = "<leader>-";
       action = ":Oil<cr>";
+      options.silent = true;
+    }
+    # floaterm
+    {
+      key = "<leader>t";
+      action = ":FloatermNew --width=0.4 --height=0.4<cr>";
       options.silent = true;
     }
   ];

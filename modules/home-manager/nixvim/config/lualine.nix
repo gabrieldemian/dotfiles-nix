@@ -19,7 +19,7 @@
       lualine_b = [
         {
           name = "branch";
-          icon = "";
+          icon = "";
         }
         "diff"
         "diagnostics"

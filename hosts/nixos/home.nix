@@ -3,10 +3,13 @@
     # catppuccin.homeManagerModules.catppuccin
     ../../modules/home-manager/zsh.nix
     ../../modules/home-manager/hyprland/default.nix
-    ../../modules/home-manager/waybar.nix
+    ../../modules/home-manager/waybar/default.nix
     ../../modules/home-manager/kitty.nix
     ../../modules/home-manager/dunst.nix
     ../../modules/home-manager/gtk.nix
+    ../../modules/home-manager/bat.nix
+    ../../modules/home-manager/wofi/default.nix
+    ../../modules/home-manager/superfile.nix
     ../../modules/home-manager/nixvim/default.nix
   ];
 
@@ -17,6 +20,9 @@
   kitty.enable = true;
   dunst.enable = true;
   nixvim.enable = true;
+  bat.enable = true;
+  superfile.enable = true;
+  wofii.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -39,7 +45,6 @@
       # xdg-desktop-portal-hyprland
       # xdg-desktop-portal-gtk
       swww
-      anyrun
       nautilus
     ];
   };
@@ -48,5 +53,9 @@
     home-manager.enable = true;
     direnv.enable = true;
     direnv.enableZshIntegration = true;
+
+    jq.enable = true;
+    fd.enable = true;
+    ripgrep.enable = true;
   };
 }
