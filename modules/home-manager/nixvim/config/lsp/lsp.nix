@@ -25,6 +25,12 @@
   config.programs.nixvim.plugins.lsp = {
     enable = true;
     servers = {
+      biome = {
+        enable = true;
+      };
+      astro = {
+        enable = true;
+      };
       ltex = {
         enable = true;
       };

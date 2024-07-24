@@ -253,6 +253,8 @@
     texliveFull
     imv # image viewer
     superfile
+    cowsay
+    figlet
 
     # cli tools for dev
     bun
