@@ -367,7 +367,7 @@ in {
             default = [" " " "];
           };
           scroll-step = 1;
-          on-click = "hyprctl dispatch exec \"[floating] pwvucontrol\"";
+          on-click = "hyprctl dispatch exec \"[float] pwvucontrol\"";
           ignored-sinks = ["Easy Effects Sink"];
         };
         "custom/dynamic_pill" = {

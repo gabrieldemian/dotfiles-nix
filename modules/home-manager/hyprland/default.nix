@@ -26,7 +26,7 @@ in {
       exec-once = "dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
 
       "$terminal" = "kitty";
-      "$fileManager" = "nautilus";
+      "$fileManager" = "kitty yazi";
       "$menu" = "wofi";
       "$mod" = "SUPER";
 
@@ -120,7 +120,7 @@ in {
           "$mod, W, killactive"
           "$mod, M, exit"
           "$mod, Space, exec, $menu --show drun"
-          "$mod, E, exec, [float;center;size 45% 45%] $fileManager"
+          "$mod, E, exec, [float;center;size 60% 60%] $fileManager"
           # floating terminal
           "$mod SHIFT, Return, exec, [float;center;size 45% 35%] kitty"
           #volume

@@ -9,7 +9,7 @@
     ../../modules/home-manager/gtk.nix
     ../../modules/home-manager/bat.nix
     ../../modules/home-manager/wofi/default.nix
-    ../../modules/home-manager/superfile.nix
+    ../../modules/home-manager/yazi.nix
     ../../modules/home-manager/nixvim/default.nix
   ];
 
@@ -21,15 +21,33 @@
   dunst.enable = true;
   nixvim.enable = true;
   bat.enable = true;
-  superfile.enable = true;
+  yazii.enable = true;
   wofii.enable = true;
+
+  # xdg.mimeApps = {
+  #   enable = true;
+  #   associations.added = {
+  #     "application/pdf" = ["org.pwmt.zathura.desktop"];
+  #     "image/png" = ["imv.desktop"];
+  #     "image/jpg" = ["imv.desktop"];
+  #     "image/jpeg" = ["imv.desktop"];
+  #     "image/webp" = ["imv.desktop"];
+  #   };
+  #   defaultApplications = {
+  #     "application/pdf" = ["org.pwmt.zathura.desktop"];
+  #     "image/png" = ["imv.desktop"];
+  #     "image/jpg" = ["imv.desktop"];
+  #     "image/jpeg" = ["imv.desktop"];
+  #     "image/webp" = ["imv.desktop"];
+  #   };
+  # };
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
     username = "gabriel";
     homeDirectory = "/home/gabriel";
-    sessionPath = [ "$HOME/.cargo/bin" ];
+    sessionPath = ["$HOME/.cargo/bin"];
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage

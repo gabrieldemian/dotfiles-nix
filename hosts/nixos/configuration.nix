@@ -128,6 +128,7 @@
 
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
+
     users.gabriel = import ./home.nix;
   };
 
@@ -212,16 +213,30 @@
     '';
   };
 
-  fonts.packages = with pkgs; [
-    jetbrains-mono
-    nerd-font-patcher
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    fira-code
-    fira-code-symbols
-    mplus-outline-fonts.githubRelease
-  ];
+  fonts = {
+    enableDefaultPackages = true;
+    fontDir.enable = true;
+    packages = with pkgs; [
+      (nerdfonts.override {fonts = ["FiraCode"];})
+      fira-code
+      fira-code-symbols
+      liberation_ttf
+      nerd-font-patcher
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      # fira-code-symbols
+      # mplus-outline-fonts.githubRelease
+    ];
+    fontconfig = {
+      defaultFonts = {
+        serif = ["Liberation Serif"];
+        # sansSerif = ["Ubuntu"];
+        monospace = ["monospace"];
+        emoji = ["Noto Color Emoji"];
+      };
+    };
+  };
 
   environment.etc."greetd/environments".text = ''
     hyprland
@@ -252,9 +267,10 @@
     killall
     texliveFull
     imv # image viewer
-    superfile
     cowsay
     figlet
+    discord
+    eza # cool ls
 
     # cli tools for dev
     bun
