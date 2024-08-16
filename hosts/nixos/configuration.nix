@@ -265,7 +265,7 @@
     pwvucontrol
     nix-prefetch-git
     killall
-    texliveFull
+    # texliveFull
     imv # image viewer
     cowsay
     figlet
@@ -282,6 +282,7 @@
     gum
     glow
     tealdeer
+    termshark
 
     # rust
     rustup

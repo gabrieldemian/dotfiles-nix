@@ -1,8 +1,8 @@
 {config, ...}: {
   config.programs.nixvim.plugins.bufferline = {
     enable = true;
-    mode = "tabs";
-    extraOptions = {
+    settings.options.mode = "tabs";
+    settings.options = {
       highlights = ''require("catppuccin.groups.integrations.bufferline").get()'';
     };
   };

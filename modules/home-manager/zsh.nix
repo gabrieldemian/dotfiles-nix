@@ -81,6 +81,8 @@ in {
     };
 
     initExtra = ''
+      export XDG_CONFIG_HOME="$HOME/.config";
+      export XDG_DOWNLOAD_DIR="$HOME/Downloads";
       function yy() {
       	if [ -n "$YAZI_LEVEL" ]; then
       		exit

@@ -93,8 +93,6 @@ in {
         preserve_split = "yes";
       };
 
-      # master.new_is_master = true;
-
       gestures.workspace_swipe = "off";
 
       misc.force_default_wallpaper = -1;
@@ -144,8 +142,8 @@ in {
           "$mod, k, movefocus, u"
           "$mod, j, movefocus, d"
           # Light
-          ",code:232,exec,light -U 5"
-          ",code:233,exec,light -A 5"
+          ",code:232,exec,light -U 2"
+          ",code:233,exec,light -A 2"
           # Example special workspace (scratchpad)
           "$mod, S, togglespecialworkspace, magic"
           "$mod SHIFT, S, movetoworkspace, special:magic"
@@ -166,7 +164,7 @@ in {
                   builtins.toString (x + 1 - (c * 10));
               in [
                 "$mod, ${ws}, workspace, ${toString (x + 1)}"
-                "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+                "$mod SHIFT, ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
               ]
             )
             10)

@@ -198,5 +198,11 @@
       action = ":FloatermNew --width=0.4 --height=0.4<cr>";
       options.silent = true;
     }
+    # expand macro
+    {
+      key = "<leader>em";
+      action = ":RustLsp expandMacro <cr>";
+      options.silent = true;
+    }
   ];
 }

@@ -1,6 +1,12 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   config.programs.nixvim.extraConfigLua = ''
-      luasnip = require("luasnip")
+      local luasnip = require("luasnip")
+      local lspkind = require("lspkind")
+
       kind_icons = {
         Text = "󰊄",
         Method = "",
@@ -30,6 +36,19 @@
       } 
 
     local cmp = require'cmp'
+
+    cmp.setup {
+      formatting = {
+        format = lspkind.cmp_format {
+          menu = {},
+        },  
+      },
+      view = {
+        docs = {
+          auto_open = false
+        }
+      }
+    }
 
       -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
       cmp.setup.cmdline({'/', "?" }, {
@@ -82,6 +101,13 @@
               ['<C-Space>'] = cmp.mapping.complete(),
               ['<CR>'] = cmp.mapping.confirm({ select = true }),
               ['<S-CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+              ['<C-g>'] = function()
+                if cmp.visible_docs() then
+                  cmp.close_docs()
+                else
+                  cmp.open_docs()
+                end
+              end
             })
           '';
         };
@@ -103,7 +129,14 @@
         performance = {
           debounce = 60;
           fetching_timeout = 200;
-          max_view_entries = 30;
+          # max_view_entries = 30;
+        };
+        view = {
+          entries = {
+            docs = {
+              auto_open = false;
+            };
+          };
         };
         window = {
           completion = {
@@ -116,7 +149,16 @@
         };
         formatting = {
           fields = ["kind" "abbr" "menu"];
-          expandable_indicator = true;
+          # expandable_indicator = true;
+          # format = lib.mkForce ''
+          #   function(_, vim_item)
+          #     menu = {},
+          #     if (vim_item.menu ~= nil and string.len(vim_item.menu) > 45) then
+          #       vim_item.menu = string.sub(vim_item.menu, 1, 42) .. "..."
+          #     end
+          #     return vim_item
+          #   end
+          # '';
         };
       };
     };

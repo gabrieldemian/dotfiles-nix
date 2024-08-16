@@ -1,34 +1,39 @@
 {config, ...}: {
   config.programs.nixvim.plugins.lspkind = {
     enable = true;
+    # cmp = {
+    #   enable = true;
+    #   maxWidth = 50;
+    #   ellipsisChar = ".";
+    # };
     mode = "symbol";
     preset = "codicons";
     symbolMap = {
-      Text = "";
-      Method = "";
-      Function = "";
+      Text = "󰊄";
+      Method = "";
+      Function = "󰡱";
       Constructor = "";
-      Field = "ﰠ";
-      Variable = "";
-      Class = "ﴯ";
+      Field = "";
+      Variable = "󱀍";
+      Class = "";
       Interface = "";
-      Module = "";
+      Module = "󰕳";
       Property = "ﰠ";
-      Unit = "塞";
-      Value = "";
-      Enum = "";
+      Unit = "";
+      Value = "";
+      Enum = "";
       Keyword = "";
       Snippet = "";
-      Color = "";
-      File = "";
-      Reference = "";
-      Folder = "";
+      Color = "";
+      File = "";
+      Reference = "";
+      Folder = "";
       EnumMember = "";
-      Constant = "";
+      Constant = "";
       Struct = "פּ";
       Event = "";
-      Operator = "";
-      TypeParameter = "";
+      Operator = "";
+      TypeParameter = "";
     };
   };
 }

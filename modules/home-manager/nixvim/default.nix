@@ -37,14 +37,14 @@ in {
     plugins = {
       # TeXpresso %
       floaterm.enable = true;
-      texpresso.enable = true;
+      # texpresso.enable = true;
       indent-blankline.enable = true;
       gitsigns.enable = true;
       surround.enable = true;
       nvim-autopairs.enable = true;
       treesitter = {
         enable = true;
-        ensureInstalled = [
+        settings.ensure_installed = [
           "rust"
           "asm"
           "bash"

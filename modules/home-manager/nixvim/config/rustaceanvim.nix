@@ -1,20 +1,27 @@
 {config, ...}: {
-  config.programs.nixvim.plugins.rust-tools = {
+  config.programs.nixvim.plugins.rustaceanvim = {
     enable = true;
-    # server = {
-    #   onAttach = ''        function(client, bufnr)
-    #             require("lsp-inlayhints").on_attach(client, bufnr)
-    #             Map("n", "<leader>h", function()
-    #               require("lsp-inlayhints").toggle()
-    #             end)
-    #           end'';
-    # };
-    inlayHints = {
-      auto = true;
-      # enable = true;
-    };
-    server = {
-      diagnostics.enable = true;
+    settings.server = {
+      standalone = false;
+      cmd = [
+        "rustup"
+        "run"
+        "nightly"
+        "rust-analyzer"
+      ];
+      enable = true;
+      default_settings = {
+        rust_analyzer = {
+          check = {
+            command = "clippy";
+          };
+          inlayHints = {
+            lifetimeElisionHints = {
+              enable = "always";
+            };
+          };
+        };
+      };
     };
   };
 }
