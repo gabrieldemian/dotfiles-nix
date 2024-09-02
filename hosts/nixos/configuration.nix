@@ -17,7 +17,7 @@
   boot = {
     blacklistedKernelModules = ["nouveau" "bluetooth" "btusb"];
     initrd.kernelModules = ["nvidia"];
-    kernelPackages = pkgs.linuxPackages_6_8;
+    # kernelPackages = pkgs.linuxPackages_6_8;
     extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
     loader = {
       systemd-boot.enable = true;
@@ -44,7 +44,7 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Set your time zone.
-  time.timeZone = "Europe/Bucharest";
+  time.timeZone = "Europe/Rome";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -265,7 +265,7 @@
     pwvucontrol
     nix-prefetch-git
     killall
-    # texliveFull
+    texliveFull
     imv # image viewer
     cowsay
     figlet
