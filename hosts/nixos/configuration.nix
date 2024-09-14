@@ -9,24 +9,23 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/battery-notifier.nix
+    ../../modules/nixos/ledger.nix
+    ../../modules/nixos/cli-tools.nix
+    ../../modules/nixos/leisure.nix
     inputs.home-manager.nixosModules.default
   ];
 
   battery-notifier.enable = true;
+  cli-tools.enable = true;
+  leisure.enable = true;
+  ledger.enable = true;
 
   boot = {
     blacklistedKernelModules = ["nouveau" "bluetooth" "btusb"];
     initrd.kernelModules = ["nvidia"];
-    # kernelPackages = pkgs.linuxPackages_6_8;
     extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
     loader = {
       systemd-boot.enable = true;
-      # grub = {
-      # configurationLimit = 5;
-      #   enable = true;
-      #   efiSupport = true;
-      #   device = "nodev";
-      # };
       efi.canTouchEfiVariables = true;
     };
   };
@@ -43,7 +42,6 @@
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  # Set your time zone.
   time.timeZone = "Europe/Rome";
 
   # Select internationalisation properties.
@@ -138,7 +136,6 @@
     nix-ld.enable = true;
     light.enable = true;
     dconf.enable = true;
-    # mtr.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
@@ -180,17 +177,6 @@
       wireplumber.enable = true;
     };
 
-    greetd = {
-      enable = false;
-      settings = rec {
-        initial_session = {
-          command = "${pkgs.hyprland}/bin/hyprland";
-          user = "gabriel";
-        };
-        default_session = initial_session;
-      };
-    };
-
     xserver = {
       # for some reason this is enabled by default
       displayManager.lightdm.enable = lib.mkForce false;
@@ -200,17 +186,6 @@
       # √(2560² + 1600²) px / 16 in ≃ 189 dpi
       dpi = 189;
     };
-
-    udev.extraRules = ''
-      # HW.1, Nano
-      SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="1b7c|2b7c|3b7c|4b7c", TAG+="uaccess", TAG+="udev-acl"
-
-      # Blue, NanoS, Aramis, HW.2, Nano X, NanoSP, Stax, Ledger Test,
-      SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", TAG+="uaccess", TAG+="udev-acl"
-
-      # Same, but with hidraw-based library (instead of libusb)
-      KERNEL=="hidraw*", ATTRS{idVendor}=="2c97", MODE="0666"
-    '';
   };
 
   fonts = {
@@ -225,8 +200,6 @@
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
-      # fira-code-symbols
-      # mplus-outline-fonts.githubRelease
     ];
     fontconfig = {
       defaultFonts = {
@@ -238,58 +211,20 @@
     };
   };
 
-  environment.etc."greetd/environments".text = ''
-    hyprland
-    bash
-    zsh
-  '';
-
   environment.systemPackages = with pkgs; [
-    # essential
     brave
     firefox
-    vim
-    wget
-    git
-    neofetch
-    lolcat
-    zathura
-    mpv
-    wl-clipboard
-    grim
-    slurp
     light
-    curl
-    ani-cli # uwu
+    wl-clipboard
     wireplumber
     pwvucontrol
-    nix-prefetch-git
-    killall
     texliveFull
-    imv # image viewer
-    cowsay
-    figlet
-    discord
-    eza # cool ls
-
-    # cli tools for dev
-    bun
-    htop
-    bottom
-    yarn
-    unzip
-    lazygit
-    gum
-    glow
-    tealdeer
-    termshark
 
     # rust
     rustup
     cargo
     rustc
 
-    ledger-live-desktop
     transmission_4-gtk
 
     # screenshare

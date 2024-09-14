@@ -60,8 +60,6 @@
     stateVersion = "23.11";
 
     packages = with pkgs; [
-      # xdg-desktop-portal-hyprland
-      # xdg-desktop-portal-gtk
       swww
       nautilus
     ];
@@ -71,9 +69,5 @@
     home-manager.enable = true;
     direnv.enable = true;
     direnv.enableZshIntegration = true;
-
-    jq.enable = true;
-    fd.enable = true;
-    ripgrep.enable = true;
   };
 }
