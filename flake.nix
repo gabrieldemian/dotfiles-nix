@@ -24,7 +24,6 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./hosts/nixos/configuration.nix
-        # nixos-hardware.nixosModules.lenovo-legion-16irx8h
       ];
     };
   };

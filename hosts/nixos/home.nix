@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  user,
+  ...
+}: {
   imports = [
     # catppuccin.homeManagerModules.catppuccin
     ../../modules/home-manager/zsh.nix
@@ -45,8 +49,8 @@
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
-    username = "gabriel";
-    homeDirectory = "/home/gabriel";
+    username = user;
+    homeDirectory = "/home/${user}";
     sessionPath = ["$HOME/.cargo/bin"];
 
     # This value determines the Home Manager release that your

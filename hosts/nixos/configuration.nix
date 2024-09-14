@@ -1,17 +1,24 @@
 # Help is available in the configuration.nix(5) man page
+#
+# Configuration of my lenovo LNVNB161216, I9 and nvidia rtx 4070
+#
 {
   lib,
   config,
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  # the only user of the machine, will be inherited by all modules that require it, as well as home-manager
+  user = "gabriel";
+in {
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/battery-notifier.nix
     ../../modules/nixos/ledger.nix
     ../../modules/nixos/cli-tools.nix
     ../../modules/nixos/leisure.nix
+    ../../modules/nixos/docker.nix
     inputs.home-manager.nixosModules.default
   ];
 
@@ -19,6 +26,8 @@
   cli-tools.enable = true;
   leisure.enable = true;
   ledger.enable = true;
+  docker.enable = true;
+  docker.user = user;
 
   boot = {
     blacklistedKernelModules = ["nouveau" "bluetooth" "btusb"];
@@ -60,16 +69,14 @@
   };
 
   users = {
-    users.gabriel = {
+    users.${user} = {
       isNormalUser = true;
-      description = "gabriel";
       extraGroups = [
         "networkmanager"
         "wheel"
         "video"
         "input"
         "audio"
-        "docker"
         "adm"
         "plugdev"
       ];
@@ -125,9 +132,9 @@
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {inherit inputs user;};
 
-    users.gabriel = import ./home.nix;
+    users.${user} = import ./home.nix;
   };
 
   programs = {
@@ -139,13 +146,6 @@
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
-    };
-  };
-
-  virtualisation = {
-    docker.rootless = {
-      enable = true;
-      setSocketVariable = true;
     };
   };
 
