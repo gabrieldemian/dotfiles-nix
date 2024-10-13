@@ -1,11 +1,11 @@
 {...}: {
   config.programs.nixvim.plugins.lualine = {
     enable = true;
+    extensions = ["fzf" "oil" "mason" "toggleterm" "nvim-dap-ui" "trouble"];
+    # options = {
+    theme = "auto";
     alwaysDivideMiddle = true;
     globalstatus = true;
-    ignoreFocus = ["neo-tree"];
-    extensions = ["fzf"];
-    theme = "catppuccin";
     componentSeparators = {
       left = "❘";
       right = "❘";
@@ -14,20 +14,44 @@
       left = "";
       right = "";
     };
+    # };
     sections = {
-      lualine_a = ["mode"];
+      lualine_a = [
+        {
+          name = "mode";
+          # color.bg = "#1e1e2e";
+        }
+      ];
       lualine_b = [
         {
           name = "branch";
           icon = "";
+          color.bg = "#1e1e2e";
         }
-        "diff"
-        "diagnostics"
+        # "diff"
+        {
+          name = "diagnostics";
+          color.bg = "#1e1e2e";
+        }
       ];
-      lualine_c = ["filename"];
-      lualine_x = ["filetype"];
-      lualine_y = ["progress"];
-      lualine_z = [''"" .. os.date("%R")''];
+      lualine_c = [
+        {
+          name = "filename";
+          color.bg = "#1e1e2e";
+        }
+      ];
+      lualine_x = [""];
+      lualine_y = [
+        {
+          name = "progress";
+          color.bg = "#1e1e2e";
+        }
+      ];
+      lualine_z = [
+        {
+          name = ''"" .. os.date("%R")'';
+        }
+      ];
     };
   };
 }

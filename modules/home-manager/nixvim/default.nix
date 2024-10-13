@@ -42,16 +42,6 @@ in {
       gitsigns.enable = true;
       surround.enable = true;
       nvim-autopairs.enable = true;
-      treesitter = {
-        enable = true;
-        settings.ensure_installed = [
-          "rust"
-          "asm"
-          "bash"
-          "typescript"
-          "c"
-        ];
-      };
       autoclose.enable = true;
       comment.enable = true;
       nvim-colorizer.enable = true;
@@ -118,6 +108,29 @@ in {
           "Spectre"
           "reason"
         ];
+      };
+      treesitter = {
+        enable = true;
+        settings = {
+          highlight.enable = true;
+          indent = {
+            enable = true;
+          };
+          ensure_installed = [
+            "rust"
+            "asm"
+            "bash"
+            "typescript"
+            "c"
+            "json"
+            "lua"
+            "git_config"
+            "git_rebase"
+            "gitattributes"
+            "gitcommit"
+            "gitignore"
+          ];
+        };
       };
     };
   };

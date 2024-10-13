@@ -1,4 +1,4 @@
-{config, ...}: {
+{...}: {
   config.programs.nixvim.plugins.none-ls = {
     enable = true;
     enableLspFormat = false;
@@ -27,15 +27,12 @@
         alejandra = {
           enable = true;
         };
-        prettierd = {
-          enable = true;
-        };
         stylua = {
           enable = true;
         };
-        # rustywind = {
-        #   enable = true;
-        # };
+        rustywind = {
+          enable = true;
+        };
       };
     };
   };
