@@ -1,4 +1,4 @@
-{config, ...}: {
+{...}: {
   config.programs.nixvim.plugins.telescope = {
     enable = true;
 
@@ -15,8 +15,12 @@
       "sk" = {
         action = "keymaps";
       };
-      # file browser actions are
-      # handled in ./extra.nix
+      "fz" = {
+        action = "current_buffer_fuzzy_find";
+      };
+      "ft" = {
+        action = "find_tags";
+      };
     };
 
     extensions = {

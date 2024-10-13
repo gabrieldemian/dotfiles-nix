@@ -225,6 +225,7 @@ in {
     wireplumber
     pwvucontrol
     texliveFull
+    timg
 
     # rust
     rustup

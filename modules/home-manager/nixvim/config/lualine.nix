@@ -1,4 +1,4 @@
-{config, ...}: {
+{...}: {
   config.programs.nixvim.plugins.lualine = {
     enable = true;
     alwaysDivideMiddle = true;
@@ -7,19 +7,19 @@
     extensions = ["fzf"];
     theme = "catppuccin";
     componentSeparators = {
-      left = "|";
-      right = "|";
+      left = "❘";
+      right = "❘";
     };
     sectionSeparators = {
-      left = "█"; # 
-      right = "█"; # 
+      left = "";
+      right = "";
     };
     sections = {
       lualine_a = ["mode"];
       lualine_b = [
         {
           name = "branch";
-          icon = "";
+          icon = "";
         }
         "diff"
         "diagnostics"

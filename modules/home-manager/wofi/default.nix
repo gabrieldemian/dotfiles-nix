@@ -119,7 +119,7 @@ in {
       @import "/home/gabriel/.config/wofi/themes/macchiato.css";
 
       * {
-        font-family: 'Fira Code', monospace;
+        font-family: 'Pixel Code', monospace;
         font-size: 18px;
       }
 

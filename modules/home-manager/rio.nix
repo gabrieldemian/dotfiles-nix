@@ -16,6 +16,36 @@ in {
       navigation.mode = "TopTab";
       padding-x = 10;
       padding-y = [10 10];
+      window = {
+        blur = true;
+        opacity = 0.9;
+      };
+      fonts = let
+        family = "Pixel Code";
+      in {
+        inherit family;
+        size = 18;
+        regular = {
+          style = "Normal";
+          inherit family;
+          weight = 300;
+        };
+        bold = {
+          style = "Normal";
+          inherit family;
+          weight = 700;
+        };
+        italic = {
+          style = "Italic";
+          inherit family;
+          weight = 300;
+        };
+        "bold-italic" = {
+          style = "Italic";
+          inherit family;
+          weight = 700;
+        };
+      };
       bindings = {
         keys =
           [
@@ -23,16 +53,6 @@ in {
               "with" = "control";
               key = "space";
               action = "ToggleVIMode";
-            }
-            {
-              "with" = "control";
-              key = "w";
-              action = "CloseTab";
-            }
-            {
-              "with" = "control";
-              key = "t";
-              action = "CreateTab";
             }
             {
               "with" = "control";
@@ -68,36 +88,6 @@ in {
               )
               9)
           );
-      };
-      window = {
-        blur = true;
-        opacity = 0.9;
-      };
-      fonts = let
-        family = "Pixel Code";
-      in {
-        inherit family;
-        size = 18;
-        regular = {
-          style = "Normal";
-          inherit family;
-          weight = 300;
-        };
-        bold = {
-          style = "Normal";
-          inherit family;
-          weight = 900;
-        };
-        italic = {
-          style = "Italic";
-          inherit family;
-          weight = 300;
-        };
-        "bold-italic" = {
-          style = "Italic";
-          inherit family;
-          weight = 900;
-        };
       };
       renderer = {
         backend = "Vulkan";

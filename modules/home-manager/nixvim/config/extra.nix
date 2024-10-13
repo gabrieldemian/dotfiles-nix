@@ -2,7 +2,6 @@
   config.programs.nixvim = {
     extraPlugins = with pkgs.vimPlugins; [
       plenary-nvim
-      telescope-file-browser-nvim
       telescope-ui-select-nvim
       lazygit-nvim
       catppuccin-nvim
@@ -30,23 +29,8 @@
 
       local builtin = require("telescope.builtin")
       local telescope = require("telescope")
-      local fb = telescope.extensions.file_browser
 
-      telescope.load_extension("file_browser")
       telescope.load_extension("ui-select")
-
-      Map("n", "fb", function()
-        fb.file_browser({
-          path = "%:p:h",
-          cwd = telescope_buffer_dir(),
-          respect_gitignore = true,
-          hidden = true,
-          grouped = false,
-          previewer = true,
-          initial_mode = "insert",
-          layout_config = { height = 40 },
-        })
-      end)
     '';
   };
 }

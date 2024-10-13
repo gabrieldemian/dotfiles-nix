@@ -16,8 +16,8 @@ in {
     style = ''
       * {
         border: none;
-        font-family: Fira Code, IosevkaTerm Nerd Font, Roboto, Helvetica, Arial, sans-serif;
-        font-size: 16px;
+        font-family: Pixel Code, Fira Code, monospace;
+        font-size: 13px;
         min-height: 0;
       }
 

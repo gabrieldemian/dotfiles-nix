@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   lib,
   ...
 }:
@@ -73,7 +72,7 @@ in {
         ahead = " 🏎💨 ";
         behind = " 😰 ";
         diverged = " 😵 ";
-        untracked = " 🤷 ‍";
+        untracked = " 🤷 ";
         stashed = " 📦 ";
         modified = " 📝 ";
         staged = "[++\($count\)](green)";
@@ -88,7 +87,8 @@ in {
       };
       line_break.disabled = false;
       directory = {
-        home_symbol = "  ";
+        # home is where the heart is
+        home_symbol = " ❤";
         read_only = "  ";
         style = "fg:mauve";
         truncation_length = 6;

@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   ...
@@ -22,7 +21,6 @@ in {
 
     settings = {
       monitor = "eDP-1,2560x1600,auto,1";
-      # exec-once = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP & dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
       exec-once = "dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
 
       "$terminal" = "rio";

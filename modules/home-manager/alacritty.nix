@@ -52,7 +52,7 @@ in {
         };
         cursor = {
           text = "#1e1e2e";
-          cursor = "#f5e0dc";
+          cursor = "#f38ba8";
         };
         vi_mode_cursor = {
           text = "#1e1e2e";
