@@ -4,24 +4,25 @@
   ...
 }: {
   imports = [
-    # catppuccin.homeManagerModules.catppuccin
     ../../modules/home-manager/zsh.nix
     ../../modules/home-manager/hyprland/default.nix
     ../../modules/home-manager/waybar/default.nix
-    ../../modules/home-manager/kitty.nix
     ../../modules/home-manager/dunst.nix
     ../../modules/home-manager/gtk.nix
     ../../modules/home-manager/bat.nix
+    ../../modules/home-manager/rio.nix
+    ../../modules/home-manager/alacritty.nix
+    ../../modules/home-manager/kitty.nix
     ../../modules/home-manager/wofi/default.nix
     ../../modules/home-manager/yazi.nix
     ../../modules/home-manager/nixvim/default.nix
   ];
 
+  rioo.enable = true;
   gtkk.enable = true;
   zsh.enable = true;
   hyprland.enable = true;
   waybar.enable = true;
-  kitty.enable = true;
   dunst.enable = true;
   nixvim.enable = true;
   bat.enable = true;
@@ -64,6 +65,7 @@
     stateVersion = "23.11";
 
     packages = with pkgs; [
+      cozette
       swww
       nautilus
     ];

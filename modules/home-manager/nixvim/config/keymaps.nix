@@ -195,7 +195,7 @@
     # floaterm
     {
       key = "<leader>t";
-      action = ":FloatermNew --width=0.4 --height=0.4<cr>";
+      action = ":FloatermNew --width=0.6 --height=0.4<cr>";
       options.silent = true;
     }
     # expand macro

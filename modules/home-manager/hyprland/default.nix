@@ -25,8 +25,8 @@ in {
       # exec-once = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP & dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
       exec-once = "dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
 
-      "$terminal" = "kitty";
-      "$fileManager" = "kitty yazi";
+      "$terminal" = "rio";
+      "$fileManager" = "rio -e yazi";
       "$menu" = "wofi";
       "$mod" = "SUPER";
 
@@ -58,7 +58,6 @@ in {
         "col.active_border" = "rgba(c6a0f6ee) rgba(ed8796ee) 45deg";
         "col.inactive_border" = "transparent";
         layout = "dwindle";
-        apply_sens_to_raw = 0; # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
       };
 
       decoration = {
@@ -120,7 +119,7 @@ in {
           "$mod, Space, exec, $menu --show drun"
           "$mod, E, exec, [float;center;size 60% 60%] $fileManager"
           # floating terminal
-          "$mod SHIFT, Return, exec, [float;center;size 45% 35%] kitty"
+          "$mod SHIFT, Return, exec, [float;center;size 45% 35%] rio"
           #volume
           ", XF86AudioRaiseVolume, exec, wpctl set-volume -l '1.0' @DEFAULT_AUDIO_SINK@ 6%+"
           ", XF86AudioLowerVolume, exec, wpctl set-volume -l '1.0' @DEFAULT_AUDIO_SINK@ 6%-"

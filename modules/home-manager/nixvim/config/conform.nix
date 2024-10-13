@@ -15,7 +15,6 @@
         lua = ["stylua"];
         toml = ["taplo"];
         nix = ["alejandra"];
-        markdown = [["prettierd" "prettier"]];
         rust = ["rustfmt"];
       };
     };

@@ -11,6 +11,7 @@
 }: let
   # the only user of the machine, will be inherited by all modules that require it, as well as home-manager
   user = "gabriel";
+  pixelcode = pkgs.callPackage ../../derivations/pixelcode.nix {};
 in {
   imports = [
     ./hardware-configuration.nix
@@ -128,6 +129,8 @@ in {
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
+      # FONTCONFIG_PATH = "${pkgs.fontconfig}/etc/fonts";
+      # FONTCONFIG_FILE = "${pkgs.fontconfig}/etc/fonts/fonts.conf";
     };
   };
 
@@ -192,14 +195,17 @@ in {
     enableDefaultPackages = true;
     fontDir.enable = true;
     packages = with pkgs; [
-      (nerdfonts.override {fonts = ["FiraCode"];})
+      cherry
+      monaspace
+      pixelcode
+      terminus_font
       fira-code
       fira-code-symbols
       liberation_ttf
-      nerd-font-patcher
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
+      (nerdfonts.override {fonts = ["FiraCode"];})
     ];
     fontconfig = {
       defaultFonts = {

@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   lib,
   ...
 }:
@@ -14,8 +13,8 @@ in {
   config.programs.kitty = mkIf cfg.enable {
     enable = true;
     settings = {
-      font_size = "15.5";
-      font_family = "Fira Code";
+      font_size = "13";
+      font_family = "Pixel Code";
       bold_font = "auto";
       italic_font = "auto";
       bold_italic_font = "auto";

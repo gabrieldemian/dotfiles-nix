@@ -35,8 +35,8 @@ in {
 
     # plugins that dont deserve their own module
     plugins = {
-      # TeXpresso %
       floaterm.enable = true;
+      # TeXpresso %
       # texpresso.enable = true;
       indent-blankline.enable = true;
       gitsigns.enable = true;

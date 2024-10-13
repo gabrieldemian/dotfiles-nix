@@ -31,9 +31,9 @@
       astro = {
         enable = true;
       };
-      ltex = {
-        enable = true;
-      };
+      # ltex = {
+      #   enable = true;
+      # };
       rust-analyzer = {
         enable = false;
         installCargo = true;
