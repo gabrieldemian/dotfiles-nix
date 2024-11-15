@@ -37,6 +37,9 @@ in {
       glow
       tealdeer
       termshark
+      grpcurl
+      postman
+      zellij
 
       # essential
       vim
