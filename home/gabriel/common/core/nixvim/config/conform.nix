@@ -1,21 +1,52 @@
-{config, ...}: {
+{ config, ... }:
+{
   config.programs.nixvim = {
     plugins.conform-nvim = {
       enable = true;
       notifyOnError = true;
       formattersByFt = {
-        html = [["biome" "prettier"]];
-        css = [["biome" "prettier"]];
-        javascript = [["biome" "prettier"]];
-        javascriptreact = [["biome" "prettier"]];
-        typescript = [["biome" "prettier"]];
-        typescriptreact = [["biome" "prettier"]];
-        java = ["google-java-format"];
-        python = ["black"];
-        lua = ["stylua"];
-        toml = ["taplo"];
-        nix = ["alejandra"];
-        rust = ["rustfmt"];
+        html = [
+          [
+            "biome"
+            "prettier"
+          ]
+        ];
+        css = [
+          [
+            "biome"
+            "prettier"
+          ]
+        ];
+        javascript = [
+          [
+            "biome"
+            "prettier"
+          ]
+        ];
+        javascriptreact = [
+          [
+            "biome"
+            "prettier"
+          ]
+        ];
+        typescript = [
+          [
+            "biome"
+            "prettier"
+          ]
+        ];
+        typescriptreact = [
+          [
+            "biome"
+            "prettier"
+          ]
+        ];
+        java = [ "google-java-format" ];
+        python = [ "black" ];
+        lua = [ "stylua" ];
+        toml = [ "taplo" ];
+        nix = [ "alejandra" ];
+        rust = [ "rustfmt" ];
       };
     };
 

@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.docker;
-in {
+in
+{
   options = {
     docker.enable = mkEnableOption "enable docker";
     docker.user = mkOption {
@@ -16,7 +18,7 @@ in {
 
   config = mkIf cfg.enable {
     users.users.${cfg.user} = {
-      extraGroups = ["docker"];
+      extraGroups = [ "docker" ];
     };
 
     virtualisation.docker.rootless = {

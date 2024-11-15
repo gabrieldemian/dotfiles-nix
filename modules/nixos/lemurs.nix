@@ -4,9 +4,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.lemurs;
-in {
+in
+{
   options.lemurs = {
     enable = mkEnableOption "enable lemurs";
   };
@@ -36,7 +38,7 @@ in {
     mode = "0555";
   };
 
-  config.environment.systemPackages = mkIf cfg.enable [pkgs.lemurs];
+  config.environment.systemPackages = mkIf cfg.enable [ pkgs.lemurs ];
 
   config.services.xserver.displayManager = mkIf cfg.enable {
     sessionCommands = ''

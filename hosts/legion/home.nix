@@ -2,7 +2,8 @@
   pkgs,
   user,
   ...
-}: {
+}:
+{
   imports = [
     ../../modules/home-manager/zsh.nix
     ../../modules/home-manager/hyprland/default.nix
@@ -33,7 +34,7 @@
   home = {
     username = user;
     homeDirectory = "/home/${user}";
-    sessionPath = ["$HOME/.cargo/bin"];
+    sessionPath = [ "$HOME/.cargo/bin" ];
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage

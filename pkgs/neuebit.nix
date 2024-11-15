@@ -1,4 +1,4 @@
-{stdenvNoCC, ...}:
+{ stdenvNoCC, ... }:
 stdenvNoCC.mkDerivation (finalAttrs: {
   name = "neuebit";
   dontConfigue = true;
@@ -9,5 +9,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     mkdir -p $out/share/fonts/opentype
     cp -R $src $out/share/fonts/opentype/
   '';
-  meta = {description = "A Neuebit Font Family derivation.";};
+  meta = {
+    description = "A Neuebit Font Family derivation.";
+  };
 })

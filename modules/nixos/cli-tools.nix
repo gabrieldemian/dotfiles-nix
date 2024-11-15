@@ -4,14 +4,17 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.cli-tools;
-in {
+in
+{
   options.cli-tools = {
     enable = mkEnableOption "enable cli-tools";
   };
 
-  config.environment.systemPackages = with pkgs;
+  config.environment.systemPackages =
+    with pkgs;
     mkIf cfg.enable [
       grim # grab images from wayland compositor
       slurp # select area screenshot

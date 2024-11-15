@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   config.programs.nixvim = {
     extraPlugins = with pkgs.vimPlugins; [
       plenary-nvim

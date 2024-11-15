@@ -2,7 +2,8 @@
   mkDefault,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./starship.nix
   ];

@@ -4,37 +4,42 @@
     settings = {
       navigation.mode = "TopTab";
       padding-x = 10;
-      padding-y = [10 10];
+      padding-y = [
+        10
+        10
+      ];
       window = {
         blur = true;
         opacity = 0.9;
       };
-      fonts = let
-        family = "Pixel Code";
-      in {
-        inherit family;
-        size = 18;
-        regular = {
-          style = "Normal";
+      fonts =
+        let
+          family = "Pixel Code";
+        in
+        {
           inherit family;
-          weight = 300;
+          size = 18;
+          regular = {
+            style = "Normal";
+            inherit family;
+            weight = 300;
+          };
+          bold = {
+            style = "Normal";
+            inherit family;
+            weight = 700;
+          };
+          italic = {
+            style = "Italic";
+            inherit family;
+            weight = 300;
+          };
+          "bold-italic" = {
+            style = "Italic";
+            inherit family;
+            weight = 700;
+          };
         };
-        bold = {
-          style = "Normal";
-          inherit family;
-          weight = 700;
-        };
-        italic = {
-          style = "Italic";
-          inherit family;
-          weight = 300;
-        };
-        "bold-italic" = {
-          style = "Italic";
-          inherit family;
-          weight = 700;
-        };
-      };
       bindings = {
         keys =
           [
@@ -60,29 +65,31 @@
             }
           ]
           # keybindings for tab(index)
-          ++ (
-            builtins.concatLists (builtins.genList (
-                x: let
-                  ws = let
+          ++ (builtins.concatLists (
+            builtins.genList (
+              x:
+              let
+                ws =
+                  let
                     c = (x + 1) / 10;
                   in
-                    builtins.toString (x + 1 - (c * 9));
-                in [
-                  {
-                    key = "${ws}";
-                    "with" = "control";
-                    action = "SelectTab(${toString x})";
-                  }
-                ]
-              )
-              9)
-          );
+                  builtins.toString (x + 1 - (c * 9));
+              in
+              [
+                {
+                  key = "${ws}";
+                  "with" = "control";
+                  action = "SelectTab(${toString x})";
+                }
+              ]
+            ) 9
+          ));
       };
       renderer = {
         backend = "Vulkan";
       };
       editor.program = "nvim";
-      editor.args = ["$1"];
+      editor.args = [ "$1" ];
       colors = {
         foreground = "#cdd6f4";
         background = "#1e1e2e";

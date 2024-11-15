@@ -4,14 +4,17 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.leisure;
-in {
+in
+{
   options.leisure = {
     enable = mkEnableOption "enable leisure";
   };
 
-  config.environment.systemPackages = with pkgs;
+  config.environment.systemPackages =
+    with pkgs;
     mkIf cfg.enable [
       zathura
       mpv

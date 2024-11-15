@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   config.programs.nixvim.plugins.lspkind = {
     enable = true;
     # cmp = {

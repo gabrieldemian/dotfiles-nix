@@ -5,7 +5,8 @@
   outputs,
   configLib,
   ...
-}: {
+}:
+{
   imports = lib.flatten [
     # import everything on curr dir ./
     (configLib.scanPaths ./.)

@@ -11,27 +11,29 @@
         };
         decorations = "None";
       };
-      font = let
-        family = "Pixel Code";
-      in {
-        size = 13;
-        normal = {
-          style = "Regular";
-          inherit family;
+      font =
+        let
+          family = "Pixel Code";
+        in
+        {
+          size = 13;
+          normal = {
+            style = "Regular";
+            inherit family;
+          };
+          bold = {
+            style = "Bold";
+            inherit family;
+          };
+          italic = {
+            style = "Italic";
+            inherit family;
+          };
+          "bold_italic" = {
+            style = "Bold Italic";
+            inherit family;
+          };
         };
-        bold = {
-          style = "Bold";
-          inherit family;
-        };
-        italic = {
-          style = "Italic";
-          inherit family;
-        };
-        "bold_italic" = {
-          style = "Bold Italic";
-          inherit family;
-        };
-      };
       colors = {
         primary = {
           background = "#1e1e2e";

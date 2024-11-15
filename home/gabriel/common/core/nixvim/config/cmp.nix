@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   config.programs.nixvim.extraConfigLua = ''
       local luasnip = require("luasnip")
       local lspkind = require("lspkind")
@@ -148,7 +149,11 @@
           };
         };
         formatting = {
-          fields = ["kind" "abbr" "menu"];
+          fields = [
+            "kind"
+            "abbr"
+            "menu"
+          ];
           # expandable_indicator = true;
           # format = lib.mkForce ''
           #   function(_, vim_item)

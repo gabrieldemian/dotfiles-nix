@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   config.programs.nixvim.plugins.bufferline = {
     enable = true;
     settings = {
@@ -8,7 +9,10 @@
         close_icon = "";
         buffer_close_icon = "";
         indicator.icon = "";
-        separator.style = ["" ""];
+        separator.style = [
+          ""
+          ""
+        ];
         show_tab_indicators = false;
       };
       highlights = {

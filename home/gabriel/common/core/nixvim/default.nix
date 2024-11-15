@@ -1,4 +1,5 @@
-{inputs, ...}: {
+{ inputs, ... }:
+{
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ./config/opts.nix
@@ -41,7 +42,7 @@
         enable = true;
         settings = {
           default_file_explorer = true;
-          columns = ["icon"];
+          columns = [ "icon" ];
           keymaps = {
             "g?" = "actions.show_help";
             "<CR>" = "actions.select";

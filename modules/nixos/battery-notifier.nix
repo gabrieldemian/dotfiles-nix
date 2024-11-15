@@ -4,9 +4,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.battery-notifier;
-in {
+in
+{
   options.battery-notifier = {
     enable = mkEnableOption "enable battery-notifier";
   };
@@ -15,8 +17,8 @@ in {
   config.systemd.user.services.battery-notifier = mkIf cfg.enable {
     enable = true;
     description = "Battery notifier";
-    wants = ["display-manager.service"];
-    wantedBy = ["graphical-session.target"];
+    wants = [ "display-manager.service" ];
+    wantedBy = [ "graphical-session.target" ];
     serviceConfig = {
       type = "notify";
     };

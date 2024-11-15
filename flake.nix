@@ -24,52 +24,63 @@
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = {
-    self,
-    nixpkgs,
-    nixos-hardware,
-    home-manager,
-    catppuccin,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    inherit (nixpkgs) lib;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixos-hardware,
+      home-manager,
+      catppuccin,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      inherit (nixpkgs) lib;
 
-    configLib = import ./lib {inherit lib;};
+      configLib = import ./lib { inherit lib; };
 
-    forAllSystems = nixpkgs.lib.genAttrs [
-      "x86_64-linux"
-    ];
-    specialArgs = {inherit inputs outputs nixpkgs configLib;};
-  in {
-    # -- modules and stuff --
-    nixosModules = import ./modules/nixos;
-    homeManagerModules = import ./modules/home-manager;
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "x86_64-linux"
+      ];
+      specialArgs = {
+        inherit
+          inputs
+          outputs
+          nixpkgs
+          configLib
+          ;
+      };
+    in
+    {
+      # -- modules and stuff --
+      nixosModules = import ./modules/nixos;
+      homeManagerModules = import ./modules/home-manager;
 
-    # $ nix fmt
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
+      # $ nix fmt
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
 
-    packages = forAllSystems (
-      system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-        import ./pkgs {inherit pkgs;}
-    );
+      packages = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        import ./pkgs { inherit pkgs; }
+      );
 
-    overlays = import ./overlays {inherit inputs outputs;};
+      overlays = import ./overlays { inherit inputs outputs; };
 
-    # -- hosts --
-    nixosConfigurations = {
-      # my main
-      legion = nixpkgs.lib.nixosSystem {
-        inherit specialArgs;
-        system = "x86_64-linux";
-        modules = [
-          home-manager.nixosModules.home-manager
-          {home-manager.extraSpecialArgs = specialArgs;}
-          ./hosts/legion
-        ];
+      # -- hosts --
+      nixosConfigurations = {
+        # my main
+        legion = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
+          modules = [
+            home-manager.nixosModules.home-manager
+            { home-manager.extraSpecialArgs = specialArgs; }
+            ./hosts/legion
+          ];
+        };
       };
     };
-  };
 }

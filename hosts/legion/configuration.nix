@@ -8,9 +8,11 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   user = "gabriel";
-in {
+in
+{
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
@@ -34,7 +36,9 @@ in {
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs user;};
+    extraSpecialArgs = {
+      inherit inputs user;
+    };
     users.${user} = import ./home.nix;
   };
 
@@ -94,7 +98,7 @@ in {
     xserver = {
       # for some reason this is enabled by default
       displayManager.lightdm.enable = lib.mkForce false;
-      videoDrivers = ["nvidiaBeta"];
+      videoDrivers = [ "nvidiaBeta" ];
       enable = true;
       xkb.layout = "us";
       # √(2560² + 1600²) px / 16 in ≃ 189 dpi

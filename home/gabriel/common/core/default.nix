@@ -6,7 +6,8 @@
   outputs,
   configLib,
   ...
-}: {
+}:
+{
   # import everything from curr dir
   imports = (configLib.scanPaths ./.) ++ (builtins.attrValues outputs.homeManagerModules);
 
@@ -83,15 +84,14 @@
   };
 
   home.packages = builtins.attrValues {
-    inherit
-      (pkgs)
+    inherit (pkgs)
       # Packages that don't have custom configs go here
-      
+
       btop # resource monitor
       copyq # clipboard manager
       coreutils # basic gnu utils
       # curl
-      
+
       eza # ls replacement
       dust # disk usage
       fd # tree style ls

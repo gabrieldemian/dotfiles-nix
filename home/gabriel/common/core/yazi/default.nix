@@ -5,13 +5,15 @@
   ...
 }:
 with lib;
-with pkgs; let
+with pkgs;
+let
   cfg = config.yazii;
   ctp = builtins.fetchGit {
     url = "https://github.com/yazi-rs/flavors";
     rev = "2d7dd2afe253c30943e9cd05158b1560a285eeab";
   };
-in {
+in
+{
   options.yazii = {
     enable = mkEnableOption "enable yazi module";
   };

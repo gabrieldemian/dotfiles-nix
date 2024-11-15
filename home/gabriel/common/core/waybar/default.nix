@@ -338,9 +338,21 @@
         position = "top";
         spacing = 5;
         margin-bottom = -11;
-        modules-left = ["hyprland/workspaces"];
-        modules-center = ["hyprland/window"];
-        modules-right = ["tray" "pulseaudio" "memory" "network" "battery" "custom/select_wallpaper" "custom/ss" "custom/cycle_wall" "custom/expand" "cpu" "clock"];
+        modules-left = [ "hyprland/workspaces" ];
+        modules-center = [ "hyprland/window" ];
+        modules-right = [
+          "tray"
+          "pulseaudio"
+          "memory"
+          "network"
+          "battery"
+          "custom/select_wallpaper"
+          "custom/ss"
+          "custom/cycle_wall"
+          "custom/expand"
+          "cpu"
+          "clock"
+        ];
 
         pulseaudio = {
           format = "{volume}% {icon}";
@@ -353,11 +365,14 @@
             phone = " ";
             portable = " ";
             car = " ";
-            default = [" " " "];
+            default = [
+              " "
+              " "
+            ];
           };
           scroll-step = 1;
           on-click = "hyprctl dispatch exec \"[float] pwvucontrol\"";
-          ignored-sinks = ["Easy Effects Sink"];
+          ignored-sinks = [ "Easy Effects Sink" ];
         };
         "custom/dynamic_pill" = {
           return-type = "json";
@@ -454,7 +469,16 @@
         cpu = {
           interval = 1;
           format = "{icon0} {icon1} {icon2} {icon3}";
-          format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+          format-icons = [
+            "▁"
+            "▂"
+            "▃"
+            "▄"
+            "▅"
+            "▆"
+            "▇"
+            "█"
+          ];
         };
         memory = {
           format = "{}%  ";
@@ -462,11 +486,21 @@
         temperature = {
           critical-threshold = 80;
           format = "{temperatureC}°C {icon}";
-          format-icons = [""];
+          format-icons = [ "" ];
         };
         backlight = {
           format = "{percent}% {icon} ";
-          format-icons = ["" "" "" "" "" "" "" "" ""];
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
         };
         battery = {
           bat = "BAT0";
@@ -476,7 +510,13 @@
             critical = 15;
           };
           format = "{capacity}% {icon} ";
-          format-icons = ["" "" "" "" ""];
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
           max-length = 25;
         };
         network = {

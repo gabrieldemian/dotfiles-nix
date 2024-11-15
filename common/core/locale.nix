@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   time.timeZone = "Europe/Rome";
 
   # Select internationalisation properties.

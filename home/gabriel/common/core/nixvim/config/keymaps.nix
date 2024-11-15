@@ -1,23 +1,36 @@
-{...}: {
+{ ... }:
+{
   config.programs.nixvim.keymaps = [
     # move in insert mode with hjkl
     {
-      mode = ["i" "c"];
+      mode = [
+        "i"
+        "c"
+      ];
       key = "<C-h>";
       action = "<Left>";
     }
     {
-      mode = ["i" "c"];
+      mode = [
+        "i"
+        "c"
+      ];
       key = "<C-j>";
       action = "<Down>";
     }
     {
-      mode = ["i" "c"];
+      mode = [
+        "i"
+        "c"
+      ];
       key = "<C-k>";
       action = "<Up>";
     }
     {
-      mode = ["i" "c"];
+      mode = [
+        "i"
+        "c"
+      ];
       key = "<C-l>";
       action = "<Right>";
     }
@@ -113,7 +126,7 @@
       action = "<cmd>Lspsaga hover_doc<cr>";
     }
     {
-      mode = ["x"];
+      mode = [ "x" ];
       key = "<C-k>";
       action = "<cmd>lua vim.lsp.buf.signature_help<cr>";
     }
@@ -218,7 +231,10 @@
       options.silent = true;
     }
     {
-      mode = ["o" "x"];
+      mode = [
+        "o"
+        "x"
+      ];
       key = "<leader>gh";
       action = ":<C-U>Gitsigns select_hunk<cr>";
     }

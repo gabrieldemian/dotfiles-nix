@@ -5,18 +5,20 @@
   configLib,
   # configVars,
   ...
-}: let
+}:
+let
   # handle = configVars.handle;
   # publicGitEmail = configVars.gitHubEmail;
   publicKey = "${config.home.homeDirectory}/.ssh/id_yubikey.pub";
-  # username = configVars.username;
-in {
+in
+# username = configVars.username;
+{
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
     userName = "gabriel";
     userEmail = "gabrielgcr45@gmail.com";
-    aliases = {};
+    aliases = { };
     extraConfig = {
       log.showSignature = "true";
       init.defaultBranch = "main";

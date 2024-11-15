@@ -1,7 +1,15 @@
-{...}: {
+{ ... }:
+{
   config.programs.nixvim.plugins.lualine = {
     enable = true;
-    extensions = ["fzf" "oil" "mason" "toggleterm" "nvim-dap-ui" "trouble"];
+    extensions = [
+      "fzf"
+      "oil"
+      "mason"
+      "toggleterm"
+      "nvim-dap-ui"
+      "trouble"
+    ];
     # options = {
     theme = "auto";
     alwaysDivideMiddle = true;
@@ -40,7 +48,7 @@
           color.bg = "#1e1e2e";
         }
       ];
-      lualine_x = [""];
+      lualine_x = [ "" ];
       lualine_y = [
         {
           name = "progress";

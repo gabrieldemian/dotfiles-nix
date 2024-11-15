@@ -1,12 +1,13 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   fonts = {
     fontconfig = {
       fontconfig.enable = true;
       fontConfig = {
-        serif = ["Liberation Serif"];
+        serif = [ "Liberation Serif" ];
         # sansSerif = ["Ubuntu"];
-        monospace = ["monospace"];
-        emoji = ["Noto Color Emoji"];
+        monospace = [ "monospace" ];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
   };

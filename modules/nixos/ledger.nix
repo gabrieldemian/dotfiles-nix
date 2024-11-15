@@ -4,9 +4,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.ledger;
-in {
+in
+{
   options.ledger = {
     enable = mkEnableOption "enable ledger";
   };
@@ -22,7 +24,8 @@ in {
     KERNEL=="hidraw*", ATTRS{idVendor}=="2c97", MODE="0666"
   '';
 
-  config.environment.systemPackages = with pkgs;
+  config.environment.systemPackages =
+    with pkgs;
     mkIf cfg.enable [
       ledger-live-desktop
     ];

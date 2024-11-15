@@ -6,9 +6,11 @@
   lib,
   configLib,
   ...
-}: let
-  # pubKeys = lib.filesystem.listFilesRecursive ./keys;
-in {
+}:
+let
+in
+# pubKeys = lib.filesystem.listFilesRecursive ./keys;
+{
   config =
     # lib.recursiveUpdate fullUserConfig
     #this is the second argument to recursiveUpdate

@@ -5,7 +5,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = lib.flatten [
     ./hardware-configuration.nix
 
@@ -22,9 +23,9 @@
   ];
 
   boot = {
-    blacklistedKernelModules = ["nouveau"];
-    initrd.kernelModules = ["nvidia"];
-    extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
+    blacklistedKernelModules = [ "nouveau" ];
+    initrd.kernelModules = [ "nvidia" ];
+    extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -55,7 +56,7 @@
     xserver = {
       # for some reason this is enabled by default
       displayManager.lightdm.enable = lib.mkForce false;
-      videoDrivers = ["nvidiaBeta"];
+      videoDrivers = [ "nvidiaBeta" ];
       enable = true;
       xkb.layout = "us";
       # √(2560² + 1600²) px / 16 in ≃ 189 dpi
