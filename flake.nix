@@ -56,9 +56,6 @@
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
 
-      # $ nix fmt
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
-
       packages = forAllSystems (
         system:
         let
@@ -68,6 +65,9 @@
       );
 
       overlays = import ./overlays { inherit inputs outputs; };
+
+      # $ nix fmt
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
 
       # -- hosts --
       nixosConfigurations = {

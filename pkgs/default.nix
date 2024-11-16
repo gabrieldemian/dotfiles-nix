@@ -3,7 +3,7 @@
   pkgs ? import <nixpkgs> { },
 }:
 {
-  pixelcode = pkgs.callPackage ./pixelcode { };
-  mondwest = pkgs.callPackage ./mondwest { };
-  neuebit = pkgs.callPackage ./neuebit { };
+  pixelcode = pkgs.callPackage ./pixelcode.nix { };
+  mondwest = pkgs.callPackage ./mondwest.nix { };
+  neuebit = pkgs.callPackage ./neuebit.nix { };
 }

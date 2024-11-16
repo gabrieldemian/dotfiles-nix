@@ -1,10 +1,13 @@
-{ stdenvNoCC, ... }:
+{
+  stdenvNoCC,
+  ...
+}:
 stdenvNoCC.mkDerivation (finalAttrs: {
   name = "mondwest";
   dontConfigue = true;
   dontUnpack = true;
   # phases = "installPhase"; # Removes all phases except installPhase
-  src = ../../fonts/PPMondwest-Regular.otf;
+  src = ../fonts/PPMondwest-Regular.otf;
   installPhase = ''
     mkdir -p $out/share/fonts/opentype
     cp -R $src $out/share/fonts/opentype/

@@ -2,13 +2,11 @@
 {
   fonts = {
     fontconfig = {
-      fontconfig.enable = true;
-      fontConfig = {
-        serif = [ "Liberation Serif" ];
-        # sansSerif = ["Ubuntu"];
-        monospace = [ "monospace" ];
-        emoji = [ "Noto Color Emoji" ];
-      };
+      enable = true;
+      #   serif = ["Liberation Serif"];
+      #   # sansSerif = ["Ubuntu"];
+      #   monospace = ["monospace"];
+      #   emoji = ["Noto Color Emoji"];
     };
   };
   home.packages = with pkgs; [

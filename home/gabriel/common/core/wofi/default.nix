@@ -92,7 +92,7 @@
     };
   };
 
-  config.programs.wofi = mkIf cfg.enable {
+  config.programs.wofi = {
     enable = true;
     settings = {
       width = 600;

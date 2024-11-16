@@ -1,15 +1,9 @@
 {
-  mkDefault,
   pkgs,
   ...
 }:
 {
-  imports = [
-    ./starship.nix
-  ];
-
   config = {
-    starship.enable = mkDefault true;
     home.packages = with pkgs; [
       zoxide
     ];

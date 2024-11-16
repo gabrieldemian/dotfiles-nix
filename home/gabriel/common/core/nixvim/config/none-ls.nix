@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   config.programs.nixvim.plugins.none-ls = {
     enable = true;
@@ -25,8 +25,9 @@
         };
       };
       formatting = {
-        alejandra = {
+        nixfmt = {
           enable = true;
+          package = pkgs.nixfmt-rfc-style;
         };
         stylua = {
           enable = true;
