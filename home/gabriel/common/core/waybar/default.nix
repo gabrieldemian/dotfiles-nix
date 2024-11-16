@@ -7,7 +7,7 @@ let
   scripts = builtins.toString (configLib.relativeToRoot "home/gabriel/common/core/waybar/scripts");
   wallpapers = builtins.toString (configLib.relativeToRoot "wallpapers");
 
-  # build this script package and return it's path
+  # build these script package and return it's path
   expand = pkgs.callPackage ./scripts/expand.nix { inherit pkgs wallpapers; };
 in
 {

@@ -1,11 +1,14 @@
 {
   pkgs ? import <nixpkgs> { },
   cooldown ? "0.1",
-  scripts ? ./.,
   # directory with wallpapers
   wallpapers,
   ...
 }:
+let
+  wall = pkgs.callPackage ./wall.nix { };
+  scripts = ./.;
+in
 pkgs.writeScriptBin "expand" ''
   #!/usr/bin/env bash
 
@@ -19,7 +22,7 @@ pkgs.writeScriptBin "expand" ''
                   index=0
               fi
               echo $index > $TEMP
-              ${scripts}/wall.sh "''${${wallpapers}[$index]}"
+              ${wall}"''${${wallpapers}[$index]}"
               exit 0
               ;;
           "arrow-icon")
