@@ -59,17 +59,12 @@ in {
       };
 
       decoration = {
-        "col.shadow" = "rgba(1a1a1aee)";
-        "col.shadow_inactive" = "rgba(22000000)";
         rounding = 10;
         blur = {
           enabled = true;
           size = 5;
           passes = 2;
         };
-        drop_shadow = "yes";
-        shadow_range = 4;
-        shadow_render_power = 3;
       };
 
       animations = {

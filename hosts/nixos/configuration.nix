@@ -184,6 +184,7 @@ in {
 
   services = {
     dbus.enable = true;
+    blueman.enable = true;
     pipewire = {
       enable = true;
       alsa.support32Bit = true;
