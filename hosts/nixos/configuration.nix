@@ -170,7 +170,15 @@ in {
       powerManagement.enable = true;
       powerManagement.finegrained = false;
       open = false;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      # package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+        version = "565.57.01";
+        sha256_64bit = "";
+        sha256_aarch64 = "";
+        openSha256 = "";
+        settingsSha256 = "";
+        persistencedSha256 = "";
+      };
     };
   };
 
