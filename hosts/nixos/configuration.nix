@@ -31,7 +31,7 @@ in {
   docker.user = user;
 
   boot = {
-    blacklistedKernelModules = ["nouveau" "bluetooth" "btusb"];
+    blacklistedKernelModules = ["nouveau"];
     initrd.kernelModules = ["nvidia"];
     extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
     loader = {
@@ -160,6 +160,10 @@ in {
   hardware = {
     graphics.enable = true;
     graphics.enable32Bit = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true; # powers up the default Bluetooth controller on boot
+    };
     nvidia = {
       nvidiaSettings = true;
       modesetting.enable = true;
