@@ -1,7 +1,11 @@
 {
   pkgs,
+  configLib,
   ...
 }:
+let
+  root = builtins.toString (configLib.relativeToRoot "./");
+in
 {
   config = {
     home.packages = with pkgs; [
@@ -40,7 +44,7 @@
       ];
 
       shellAliases = {
-        nrs = "sudo nixos-rebuild switch --flake ~/dotfiles";
+        nrs = "sudo nixos-rebuild switch --flake ${root}";
         "docker-clean" = "docker system prune --all -f --volumes";
         adog = "git log --all --decorate --oneline --graph";
         glog = "git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit";

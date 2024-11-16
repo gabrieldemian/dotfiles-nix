@@ -1,4 +1,16 @@
 {
+  configLib,
+  pkgs,
+  ...
+}:
+let
+  scripts = builtins.toString (configLib.relativeToRoot "home/gabriel/common/core/waybar/scripts");
+  wallpapers = builtins.toString (configLib.relativeToRoot "wallpapers");
+
+  # build this script package and return it's path
+  expand = pkgs.callPackage ./scripts/expand.nix { inherit pkgs wallpapers; };
+in
+{
   config.programs.waybar = {
     enable = true;
 
@@ -376,28 +388,28 @@
         };
         "custom/dynamic_pill" = {
           return-type = "json";
-          exec = "~/dotfiles/modules/home-manager/waybar/scripts/tools/start_dyn.sh";
+          exec = scripts + "/start_dyn.sh";
           escape = true;
         };
         "custom/ss" = {
           format = "{} ";
-          exec = "~/dotfiles/modules/home-manager/waybar/scripts/tools/expand.sh ss-icon";
-          on-click = "~/dotfiles/modules/home-manager/waybar/scripts/screenshot.sh";
+          exec = expand + " ss-icon";
+          on-click = scripts + "/screenshot.sh";
         };
         "custom/select_wallpaper" = {
           format = "{} ";
-          exec = "~/dotfiles/modules/home-manager/waybar/scripts/tools/expand.sh wall-icon";
-          on-click = "~/dotfiles/modules/home-manager/wofi/scripts/select_wallpaper.sh";
+          exec = scripts + "/expand.sh wall-icon";
+          on-click = scripts + "/select_wallpaper.sh";
         };
         "custom/cycle_wall" = {
           format = "{}";
-          exec = "~/dotfiles/modules/home-manager/waybar/scripts/tools/expand.sh wall";
-          on-click = "~/dotfiles/modules/home-manager/waybar/scripts/tools/expand.sh cycle";
+          exec = scripts + "/expand.sh cycle";
+          on-click = scripts + "/expand.sh cycle";
         };
         "custom/expand" = {
-          on-click = "~/dotfiles/modules/home-manager/waybar/scripts/expand_toolbar.sh";
           format = "{} ";
-          exec = "~/dotfiles/modules/home-manager/waybar/scripts/tools/expand.sh arrow-icon";
+          on-click = scripts + "/expand_toolbar.sh";
+          exec = scripts + "/expand.sh arrow-icon";
         };
         "keyboard-state" = {
           numlock = true;

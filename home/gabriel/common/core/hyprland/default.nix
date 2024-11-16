@@ -1,6 +1,12 @@
+{ configLib, ... }:
+let
+  wallpapers = builtins.toString (configLib.relativeToRoot "wallpapers");
+  scripts = builtins.toString (configLib.relativeToRoot "home/gabriel/common/core/hyprland/scripts");
+in
 {
   config.wayland.windowManager.hyprland = {
     enable = true;
+
     xwayland = {
       enable = true;
     };
@@ -10,7 +16,7 @@
 
     settings = {
       monitor = "eDP-1,2560x1600@240,auto,1";
-      exec-once = "dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
+      exec-once = "dunst & swww-daemon & waybar & swww img ${wallpapers}/girl.png &";
 
       "$terminal" = "rio";
       "$fileManager" = "rio -e yazi";
@@ -132,7 +138,7 @@
           "$mod, mouse_down, workspace, e+1"
           "$mod, mouse_up, workspace, e-1"
           # Toggle game mode to disable animations
-          "$mod CTRL SHIFT, 0, exec, ~/dotfiles/modules/home-manager/hyprland/scripts/gamemode.sh"
+          "$mod CTRL SHIFT, 0, exec, ${scripts}/gamemode.sh"
         ]
         ++ (
           # workspaces

@@ -3,9 +3,7 @@
 TEMP=/tmp/current_wall
 
 files=(~/dotfiles/wallpapers/*)
-
 scripts=~/dotfiles/modules/home-manager/waybar/scripts
-
 cooldown=0.1
 
 while true
