@@ -31,9 +31,11 @@ in {
   docker.user = user;
 
   boot = {
-    blacklistedKernelModules = ["nouveau"];
-    initrd.kernelModules = ["nvidia"];
-    extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
+    kernelPackages = pkgs.linuxPackages_latest;
+    blacklistedKernelModules = [];
+    # initrd.kernelModules = ["nvidia"];
+    # extraModulePackages = [config.boot.kernelPackages.nvidia_x11];config
+    kernelParams = ["nvidia_drm.fbdev=1" "nvidia_drm.modeset=1"];
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -128,9 +130,30 @@ in {
       EDITOR = "nvim";
     };
     sessionVariables = {
-      NIXOS_OZONE_WL = "1";
-      # FONTCONFIG_PATH = "${pkgs.fontconfig}/etc/fonts";
-      # FONTCONFIG_FILE = "${pkgs.fontconfig}/etc/fonts/fonts.conf";
+      NIXOS_OZONE_WL = "1"; # Hint electron apps to use wayland
+      WLR_NO_HARDWARE_CURSORS = "1"; # Fix cursor rendering issue on wlr nvidia.
+
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      XDG_SESSION_TYPE = "wayland";
+      XDG_SESSION_DESKTOP = "Hyprland";
+
+      GBM_BACKEND = "nvidia-drm";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      LIBVA_DRIVER_NAME = "nvidia";
+      __GL_GSYNC_ALLOWED = "1";
+      __GL_VRR_ALLOWED = "0";
+      WLR_DRM_NO_ATOMIC = "1";
+
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      QT_QPA_PLATFORM = "wayland";
+      QT_QPA_PLATFORMTHEME = "qt5ct";
+
+      GDK_SCALE = "2";
+
+      ELECTRON_OZONE_PLATFORM_HINT = "auto";
+
+      NVD_BACKEND = "direct";
     };
   };
 
@@ -164,21 +187,41 @@ in {
       enable = true;
       powerOnBoot = true; # powers up the default Bluetooth controller on boot
     };
-    nvidia = {
+    opengl = {
+      enable = true;
+      extraPackages = with pkgs; [
+        vpl-gpu-rt # for newer GPUs on NixOS >24.05 or unstable
+      ];
+    };
+    nvidia = let
+      _rcu_patch = pkgs.fetchpatch {
+        url = "https://github.com/gentoo/gentoo/raw/c64caf53/x11-drivers/nvidia-drivers/files/nvidia-drivers-470.223.02-gpl-pfn_valid.patch";
+        hash = "sha256-eZiQQp2S/asE7MfGvfe6dA/kdCvek9SYa/FFGp24dVg=";
+      };
+    in {
+      # prime = {
+      #   offload = {
+      #     enable = true;
+      #     enableOffloadCmd = true;
+      #   };
+      #   intelBusId = "PCI:0:2:0";
+      #   nvidiaBusId = "PCI:01:00:0";
+      # };
       nvidiaSettings = true;
       modesetting.enable = true;
-      powerManagement.enable = true;
+      powerManagement.enable = false;
       powerManagement.finegrained = false;
       open = false;
-      # package = config.boot.kernelPackages.nvidiaPackages.beta;
-      package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-        version = "565.57.01";
-        sha256_64bit = "";
-        sha256_aarch64 = "";
-        openSha256 = "";
-        settingsSha256 = "";
-        persistencedSha256 = "";
-      };
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      # package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+      #   version = "565.57.01";
+      #   sha256_64bit = "";
+      #   sha256_aarch64 = "";
+      #   openSha256 = "";
+      #   settingsSha256 = "";
+      #   persistencedSha256 = "";
+      #   patches = [rcu_patch];
+      # };
     };
   };
 
@@ -196,7 +239,8 @@ in {
     xserver = {
       # for some reason this is enabled by default
       displayManager.lightdm.enable = lib.mkForce false;
-      videoDrivers = ["nvidiaBeta"];
+      # videoDrivers = ["nvidiaBeta"];
+      videoDrivers = ["nvidia-dkms"];
       enable = true;
       xkb.layout = "us";
       # √(2560² + 1600²) px / 16 in ≃ 189 dpi
@@ -216,7 +260,7 @@ in {
       fira-code-symbols
       liberation_ttf
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       (nerdfonts.override {fonts = ["FiraCode"];})
     ];
@@ -239,6 +283,9 @@ in {
     pwvucontrol
     texliveFull
     timg
+    postman
+    lshw
+    inxi
 
     # rust
     rustup

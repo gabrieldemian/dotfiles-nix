@@ -50,7 +50,7 @@ in {
         keys =
           [
             {
-              "with" = "control";
+              "with" = "control | shift";
               key = "space";
               action = "ToggleVIMode";
             }

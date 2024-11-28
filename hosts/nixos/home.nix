@@ -19,6 +19,7 @@
   ];
 
   rioo.enable = true;
+  alacritty.enable = true;
   gtkk.enable = true;
   zsh.enable = true;
   hyprland.enable = true;
