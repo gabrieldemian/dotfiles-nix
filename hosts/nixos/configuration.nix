@@ -33,8 +33,6 @@ in {
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     blacklistedKernelModules = [];
-    # initrd.kernelModules = ["nvidia"];
-    # extraModulePackages = [config.boot.kernelPackages.nvidia_x11];config
     kernelParams = ["nvidia_drm.fbdev=1" "nvidia_drm.modeset=1"];
     loader = {
       systemd-boot.enable = true;
@@ -137,7 +135,7 @@ in {
       XDG_SESSION_TYPE = "wayland";
       XDG_SESSION_DESKTOP = "Hyprland";
 
-      GBM_BACKEND = "nvidia-drm";
+      GBM_BACKEND = "nvidia";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       LIBVA_DRIVER_NAME = "nvidia";
       __GL_GSYNC_ALLOWED = "1";
@@ -181,24 +179,18 @@ in {
   };
 
   hardware = {
-    graphics.enable = true;
-    graphics.enable32Bit = true;
     bluetooth = {
       enable = true;
       powerOnBoot = true; # powers up the default Bluetooth controller on boot
     };
-    opengl = {
+    graphics = {
       enable = true;
+      enable32Bit = true;
       extraPackages = with pkgs; [
         vpl-gpu-rt # for newer GPUs on NixOS >24.05 or unstable
       ];
     };
-    nvidia = let
-      _rcu_patch = pkgs.fetchpatch {
-        url = "https://github.com/gentoo/gentoo/raw/c64caf53/x11-drivers/nvidia-drivers/files/nvidia-drivers-470.223.02-gpl-pfn_valid.patch";
-        hash = "sha256-eZiQQp2S/asE7MfGvfe6dA/kdCvek9SYa/FFGp24dVg=";
-      };
-    in {
+    nvidia = {
       # prime = {
       #   offload = {
       #     enable = true;
@@ -213,15 +205,6 @@ in {
       powerManagement.finegrained = false;
       open = false;
       package = config.boot.kernelPackages.nvidiaPackages.beta;
-      # package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-      #   version = "565.57.01";
-      #   sha256_64bit = "";
-      #   sha256_aarch64 = "";
-      #   openSha256 = "";
-      #   settingsSha256 = "";
-      #   persistencedSha256 = "";
-      #   patches = [rcu_patch];
-      # };
     };
   };
 
@@ -239,8 +222,7 @@ in {
     xserver = {
       # for some reason this is enabled by default
       displayManager.lightdm.enable = lib.mkForce false;
-      # videoDrivers = ["nvidiaBeta"];
-      videoDrivers = ["nvidia-dkms"];
+      videoDrivers = ["nvidia"];
       enable = true;
       xkb.layout = "us";
       # √(2560² + 1600²) px / 16 in ≃ 189 dpi

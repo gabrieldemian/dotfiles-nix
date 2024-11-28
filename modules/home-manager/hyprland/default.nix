@@ -20,7 +20,7 @@ in {
     # systemd.enable = true;
 
     settings = {
-      monitor = "eDP-1,2560x1600,auto,1";
+      monitor = "eDP-1,2560x1600@240,auto,1";
       exec-once = "dunst & swww-daemon & waybar & swww img ../../../wallpapers/girl.png &";
 
       "$terminal" = "rio";
