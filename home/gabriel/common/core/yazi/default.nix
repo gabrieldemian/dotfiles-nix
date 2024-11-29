@@ -1,9 +1,11 @@
-{...}: let
+{ ... }:
+let
   ctp = builtins.fetchGit {
     url = "https://github.com/yazi-rs/flavors";
     rev = "2d7dd2afe253c30943e9cd05158b1560a285eeab";
   };
-in {
+in
+{
   config.programs.yazi = {
     enable = true;
     enableZshIntegration = true;

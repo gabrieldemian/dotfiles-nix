@@ -28,7 +28,6 @@ in
 
       # cli productivity
       ripgrep
-      jq
       fd
       jq
       eza

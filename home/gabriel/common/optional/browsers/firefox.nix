@@ -22,7 +22,7 @@ in
     policies = {
       AppAutoUpdate = false; # Disable automatic application update
       BackgroundAppUpdate = false; # Disable automatic application update in the background, when the application is not running.
-      DefaultDownloadDirectory = "${config.home.homeDirectory}/downloads";
+      DefaultDownloadDirectory = "${config.home.homeDirectory}/Downloads";
       DisableBuiltinPDFViewer = false;
       DisableFirefoxStudies = true;
       DisableFirefoxAccounts = false; # Enable Firefox Sync
@@ -60,19 +60,19 @@ in
             };
           in
           builtins.listToAttrs [
-            #TODO Add more of these and test. not high priority though since mozilla sync will pull them in too
-            # Development
-            #(extension "user-agent-switcher" "{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}") # failed
+            # quality of life
+            (extension "dark" "{firefox-compact-dark@mozilla.org}")
 
             # Privacy / Security
-            (extension "noscript" "{73a6fe31-595d-460b-a920-fcc0f8843232}")
+            (extension "bitwarden" "{446900e4-71c2-419f-a6a7-df9c091e268b}")
+            # (extension "noscript" "{73a6fe31-595d-460b-a920-fcc0f8843232}")
             (extension "ublock-origin" "uBlock0@raymondhill.net")
-            (extension "ignore-cookies" "jid1-KKzOGWgsW3Ao4Q@jetpack") # failed # Ignore cookie setting pop-ups
-            (extension "privacy-badger17" "jid1-MnnxcxisBPnSXQ@jetpack")
-            (extension "cookie-autodelete" "CookieAutoDelete@kennydo.com")
+            # (extension "ignore-cookies" "jid1-KKzOGWgsW3Ao4Q@jetpack") # failed # Ignore cookie setting pop-ups
+            # (extension "privacy-badger17" "jid1-MnnxcxisBPnSXQ@jetpack")
+            # (extension "cookie-autodelete" "CookieAutoDelete@kennydo.com")
 
             # Layout / Themeing
-            (extension "tree-style-tab" "treestyletab@piro.sakura.ne.jp")
+            # (extension "tree-style-tab" "treestyletab@piro.sakura.ne.jp")
             (extension "darkreader" "addon@darkreader.org")
 
             # Voice
@@ -82,7 +82,6 @@ in
             # Misc
             (extension "s3download-statusbar" "{6913849f-c79f-4f3e-83e4-890d91ad6154}")
             (extension "auto-tab-discard" "{c2c003ee-bd69-42a2-b0e9-6f34222cb046}")
-            (extension "reddit-enhancement-suite" "jid1-xUfzOsOFlzSOXg@jetpack")
           ]
         )
         // {

@@ -5,10 +5,10 @@
   ...
 }:
 let
-  # handle = configVars.handle;
-  # publicGitEmail = configVars.gitHubEmail;
-  # publicKey = "${config.home.homeDirectory}/.ssh/id_yubikey.pub";
 in
+# handle = configVars.handle;
+# publicGitEmail = configVars.gitHubEmail;
+# publicKey = "${config.home.homeDirectory}/.ssh/id_yubikey.pub";
 # username = configVars.username;
 {
   programs.git = {
@@ -37,8 +37,8 @@ in
       # gpg.ssh.allowedSignersFile = "${config.home.homeDirectory}/.ssh/allowed_signers";
     };
     # signing = {
-      # signByDefault = true;
-      # key = publicKey;
+    # signByDefault = true;
+    # key = publicKey;
     # };
     ignores = [
       ".csvignore"

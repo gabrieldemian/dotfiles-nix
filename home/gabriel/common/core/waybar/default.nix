@@ -1,14 +1,16 @@
 {
   configLib,
   pkgs,
+  config,
   ...
 }:
 let
-  scripts = builtins.toString (configLib.relativeToRoot "home/gabriel/common/core/waybar/scripts");
   wallpapers = builtins.toString (configLib.relativeToRoot "wallpapers");
-
-  # build these script package and return it's path
-  expand = pkgs.callPackage ./scripts/expand.nix { inherit pkgs wallpapers; };
+  cycle_wall = pkgs.callPackage ./scripts/cycle_wall.nix { inherit pkgs wallpapers; };
+  screenshot = pkgs.callPackage ./scripts/screenshot.nix { inherit pkgs; };
+  select_wallpaper = pkgs.callPackage ../wofi/scripts/select_wallpaper.nix {
+    inherit pkgs configLib config;
+  };
 in
 {
   config.programs.waybar = {
@@ -77,11 +79,9 @@ in
       #tray,
       #mode,
       #idle_inhibitor,
-      #custom-expand,
       #custom-cycle_wall,
       #custom-ss,
       #custom-select_wallpaper,
-      #custom-dynamic_pill,
       #mpd {
         color: #cad3f5;
         padding: 0 10px;
@@ -96,47 +96,6 @@ in
         background: linear-gradient(45deg, #181926 0%, #1e2030 43%, #181926 80%, #181926 100%);
         color: #cad3f5;
         padding: 0 100px;
-      }
-
-      #custom-dynamic_pill.low{
-        background: rgb(148,226,213);
-        background: linear-gradient(52deg, rgba(148,226,213,1) 0%, rgba(137,220,235,1) 19%, rgba(116,199,236,1) 43%, rgba(137,180,250,1) 56%, rgba(180,190,254,1) 80%, rgba(186,187,241,1) 100%);
-        background-size: 300% 300%;
-        text-shadow: 0 0 5px rgba(0, 0, 0, 0.377);
-        animation: gradient 15s ease infinite;
-        color: #fff;
-      }
-
-      #custom-dynamic_pill.normal{
-        background: rgb(166,209,137);
-        background: linear-gradient(52deg, rgba(166,209,137,1) 0%, rgba(166,227,161,1) 26%, rgba(148,226,213,1) 65%, rgba(129,200,190,1) 100%);
-        background-size: 300% 300%;
-        animation: gradient 15s ease infinite;
-        text-shadow: 0 0 5px rgba(0, 0, 0, 0.377);
-        color: #fff;
-      }
-
-      #custom-dynamic_pill.critical{
-        background: rgb(235,160,172);
-        background: linear-gradient(52deg, rgba(235,160,172,1) 0%, rgba(243,139,168,1) 30%, rgba(231,130,132,1) 48%, rgba(250,179,135,1) 77%, rgba(249,226,175,1) 100%);
-        background-size: 300% 300%;
-        animation: gradient 15s ease infinite;
-        text-shadow: 0 0 5px rgba(0, 0, 0, 0.377);
-        color: #fff;
-      }
-
-      #custom-dynamic_pill.playing{
-        background: rgb(249,226,175);
-        background: linear-gradient(45deg, rgba(249,226,175,1) 0%, rgba(245,194,231,1) 20%, rgba(180,190,254,1) 100%);
-        background-size: 300% 300%;
-        animation: gradient 15s ease infinite;
-        text-shadow: 0 0 5px rgba(0, 0, 0, 0.377);
-        color: #fff ;
-      }
-
-      #custom-dynamic_pill.paused{
-        background: #fff ;
-        color: #b4befe;
       }
 
       #custom-ss, #custom-select_wallpaper {
@@ -386,30 +345,17 @@ in
           on-click = "hyprctl dispatch exec \"[float] pwvucontrol\"";
           ignored-sinks = [ "Easy Effects Sink" ];
         };
-        "custom/dynamic_pill" = {
-          return-type = "json";
-          exec = scripts + "/start_dyn.sh";
-          escape = true;
-        };
         "custom/ss" = {
-          format = "{} ";
-          exec = expand + " ss-icon";
-          on-click = scripts + "/screenshot.sh";
+          format = "{}  ";
+          on-click = screenshot;
         };
         "custom/select_wallpaper" = {
-          format = "{} ";
-          exec = scripts + "/expand.sh wall-icon";
-          on-click = scripts + "/select_wallpaper.sh";
+          format = "{} 󰸉 ";
+          on-click = select_wallpaper;
         };
         "custom/cycle_wall" = {
           format = "{}";
-          exec = scripts + "/expand.sh cycle";
-          on-click = scripts + "/expand.sh cycle";
-        };
-        "custom/expand" = {
-          format = "{} ";
-          on-click = scripts + "/expand_toolbar.sh";
-          exec = scripts + "/expand.sh arrow-icon";
+          on-click = cycle_wall;
         };
         "keyboard-state" = {
           numlock = true;

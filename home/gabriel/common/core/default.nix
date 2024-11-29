@@ -4,18 +4,19 @@
   lib,
   pkgs,
   outputs,
+  configLib,
   ...
 }:
 {
-  # import everything from curr dir
-  imports = builtins.attrValues outputs.homeManagerModules;
+  # import everything from core
+  imports = (configLib.scanPaths ./.) ++ (builtins.attrValues outputs.homeManagerModules);
 
   services.ssh-agent.enable = true;
 
   home = {
     username = lib.mkDefault "gabriel";
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
-    stateVersion = lib.mkDefault "23.05";
+    stateVersion = lib.mkDefault "23.11";
     sessionPath = [
       "$HOME/.local/bin"
     ];
@@ -33,7 +34,6 @@
     enable = true;
     portal = {
       enable = true;
-      # wlr.enable = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-hyprland
         xdg-desktop-portal-wlr
@@ -86,22 +86,17 @@
     inherit (pkgs)
       # Packages that don't have custom configs go here
 
-      btop # resource monitor
-      copyq # clipboard manager
+      bottom
       coreutils # basic gnu utils
-      # curl
-
       eza # ls replacement
       dust # disk usage
       fd # tree style ls
-      findutils # find
+      # findutils # find
       fzf # fuzzy search
       jq # JSON pretty printer and manipulator
       nix-tree # nix package tree viewer
       neofetch # fancier system info than pfetch
       ncdu # TUI disk usage
-      pciutils
-      pfetch # system info
       pre-commit # git hooks
       p7zip # compression & encryption
       ripgrep # better grep
@@ -112,13 +107,11 @@
       termshark
       killall
       steam-run # for running non-NixOS-packaged binaries on Nix
-      usbutils
-      tree # cli dir tree viewer
       unzip # zip extraction
       unrar # rar extraction
       xdg-utils # provide cli tools such as `xdg-mime` and `xdg-open`
       xdg-user-dirs
-      wev # show wayland events. also handy for detecting keypress codes
+      # wev # show wayland events. also handy for detecting keypress codes
       wget # downloader
       zip # zip compression
       ;

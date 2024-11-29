@@ -11,11 +11,11 @@
     # import everything on curr dir ./
     (configLib.scanPaths ./.)
 
-    # -- load users here --
-    (configLib.relativeToRoot "common/users/gabriel")
-
     inputs.home-manager.nixosModules.home-manager
     (builtins.attrValues outputs.nixosModules)
+
+    # -- load users here --
+    (configLib.relativeToRoot "common/users/gabriel")
   ];
 
   home-manager.extraSpecialArgs = {

@@ -1,19 +1,6 @@
+{ pkgs, ... }:
 {
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-with lib;
-let
-  cfg = config.ledger;
-in
-{
-  options.ledger = {
-    enable = mkEnableOption "enable ledger";
-  };
-
-  config.services.udev.extraRules = mkIf cfg.enable ''
+  config.services.udev.extraRules = ''
     # HW.1, Nano
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="1b7c|2b7c|3b7c|4b7c", TAG+="uaccess", TAG+="udev-acl"
 
@@ -24,9 +11,7 @@ in
     KERNEL=="hidraw*", ATTRS{idVendor}=="2c97", MODE="0666"
   '';
 
-  config.environment.systemPackages =
-    with pkgs;
-    mkIf cfg.enable [
-      ledger-live-desktop
-    ];
+  config.environment.systemPackages = with pkgs; [
+    ledger-live-desktop
+  ];
 }

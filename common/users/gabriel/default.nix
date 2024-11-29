@@ -48,6 +48,8 @@
         };
       };
 
+      # -- packages and programs that this user will have in all hosts --
+
       # create ssh sockets directory for controlpaths when homemanager not loaded (i.e. isminimal)
       # systemd.tmpfiles.rules = let
       #   user = config.users.users.${configVars.username}.name;
@@ -55,12 +57,16 @@
       # in ["d /home/${configVars.username}/.ssh/sockets 0750 ${user} ${group} -"];
 
       # No matter what environment we are in we want these tools for root, and the user(s)
-      programs.zsh.enable = true;
-      programs.git.enable = true;
+      programs = {
+        direnv.enable = true;
+        direnv.enableZshIntegration = true;
+        zsh.enable = true;
+        git.enable = true;
+      };
 
       environment.systemPackages = with pkgs; [
-        just
-        rsync
+        # just
+        # rsync
       ];
     };
 }

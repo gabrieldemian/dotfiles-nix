@@ -114,9 +114,15 @@
           };
         };
       };
-      eslint = {enable = true;};
-      bashls = {enable = true;};
-      ruff = {enable = true;};
+      eslint = {
+        enable = true;
+      };
+      bashls = {
+        enable = true;
+      };
+      ruff = {
+        enable = true;
+      };
     };
   };
 }

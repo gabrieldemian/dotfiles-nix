@@ -4,15 +4,15 @@
   lib,
   ...
 }:
-  {
+{
   config = {
     gtk = {
       enable = true;
       theme = {
         name = "Catppuccin-Frappe-Compact-Pink-Dark";
         package = pkgs.catppuccin-gtk.override {
-          accents = ["pink"];
-          tweaks = ["rimless"];
+          accents = [ "pink" ];
+          tweaks = [ "rimless" ];
           size = "compact";
           variant = "frappe";
         };
@@ -68,8 +68,8 @@
       style = {
         name = "Catppuccin-Frappe-Dark";
         package = pkgs.catppuccin-kde.override {
-          flavour = ["frappe"];
-          accents = ["pink"];
+          flavour = [ "frappe" ];
+          accents = [ "pink" ];
         };
       };
     };

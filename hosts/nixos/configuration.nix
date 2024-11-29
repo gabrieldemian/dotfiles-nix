@@ -8,11 +8,13 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   # the only user of the machine, will be inherited by all modules that require it, as well as home-manager
   user = "gabriel";
-  pixelcode = pkgs.callPackage ../../derivations/pixelcode.nix {};
-in {
+  pixelcode = pkgs.callPackage ../../derivations/pixelcode.nix { };
+in
+{
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/battery-notifier.nix
@@ -32,8 +34,11 @@ in {
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
-    blacklistedKernelModules = [];
-    kernelParams = ["nvidia_drm.fbdev=1" "nvidia_drm.modeset=1"];
+    blacklistedKernelModules = [ ];
+    kernelParams = [
+      "nvidia_drm.fbdev=1"
+      "nvidia_drm.modeset=1"
+    ];
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -50,7 +55,10 @@ in {
     networkmanager.enable = true;
   };
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   time.timeZone = "Europe/Rome";
 
@@ -156,7 +164,9 @@ in {
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs user;};
+    extraSpecialArgs = {
+      inherit inputs user;
+    };
 
     users.${user} = import ./home.nix;
   };
@@ -222,7 +232,7 @@ in {
     xserver = {
       # for some reason this is enabled by default
       displayManager.lightdm.enable = lib.mkForce false;
-      videoDrivers = ["nvidia"];
+      videoDrivers = [ "nvidia" ];
       enable = true;
       xkb.layout = "us";
       # √(2560² + 1600²) px / 16 in ≃ 189 dpi
@@ -244,14 +254,14 @@ in {
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
-      (nerdfonts.override {fonts = ["FiraCode"];})
+      (nerdfonts.override { fonts = [ "FiraCode" ]; })
     ];
     fontconfig = {
       defaultFonts = {
-        serif = ["Liberation Serif"];
+        serif = [ "Liberation Serif" ];
         # sansSerif = ["Ubuntu"];
-        monospace = ["monospace"];
-        emoji = ["Noto Color Emoji"];
+        monospace = [ "monospace" ];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
   };

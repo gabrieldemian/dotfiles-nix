@@ -4,9 +4,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.zsh;
-in {
+in
+{
   imports = [
     ./starship.nix
   ];
@@ -17,7 +19,8 @@ in {
 
   config.starship.enable = mkDefault true;
 
-  config.home.packages = with pkgs;
+  config.home.packages =
+    with pkgs;
     mkIf cfg.enable [
       zoxide
     ];
