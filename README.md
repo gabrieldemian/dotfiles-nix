@@ -1,16 +1,25 @@
-# Gabriel Dotfiles
-My personal dotfiles, heavily focused on neovim. Not guaranteed to work out-of-the-box, take only what you need.
+# Lombardo's Dotfiles
 
-## Architecture
+A multi-host multi-user config.
+
+Mostly stolen from [this config](https://github.com/EmergentMind/nix-config/tree/dev)
+
+Still a work in progress.
+
 ```
- ╭─ wallpapers           -> a lot of frieren
- ├─ flake.nix            -> entry point, where the host is loaded
+ ╭─ wallpapers           -> frieren supremacy
+ ├─ flake.nix            -> entry point
  ├─ hosts                -> machines (only one called "nixos" which is my legion laptop with nvidia)
+ ├─ common               -> everything that is shared between hosts, users, programs, etc.
+ ├─ pkgs                 -> custom pkgs/derivations
+ ├─ fonts                -> source of obscure fonts that I couldn't find on nixpkgs
+ ├─ overlays             -> overlays and overrides, not really used
+ ├─ lib                  -> utility functions, etc
  ├─ modules/home-manager -> reusable home-manager modules
  ╰─ modules/nixos        -> reusable nixos modules
 ```
 
-## Info
+## Main host (legion)
 ```
  ╭─ distro     -> nixos
  ├─ editor     -> neovim

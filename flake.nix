@@ -56,6 +56,8 @@
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
 
+      # pkgs that can be built detachedly like:
+      # nix build .#pixelcode
       packages = forAllSystems (
         system:
         let
@@ -64,6 +66,13 @@
         import ./pkgs { inherit pkgs; }
       );
 
+      # overlays for nixpkgs pkgs, this is set in:
+      #
+      # `common/core/default.nix`
+      #
+      # and on the core of users homes.
+      #
+      # `home/gabriel/common/core/default.nix`
       overlays = import ./overlays { inherit inputs outputs; };
 
       # $ nix fmt

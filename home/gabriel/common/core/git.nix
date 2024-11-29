@@ -5,10 +5,10 @@
   ...
 }:
 let
-# handle = configVars.handle;
-# publicGitEmail = configVars.gitHubEmail;
-# publicKey = "${config.home.homeDirectory}/.ssh/id_yubikey.pub";
-# username = configVars.username;
+  # handle = configVars.handle;
+  # publicGitEmail = configVars.gitHubEmail;
+  # publicKey = "${config.home.homeDirectory}/.ssh/id_yubikey.pub";
+  # username = configVars.username;
   publicKey = "${config.home.homeDirectory}/.gnupg/pubring.kbx";
 in
 {
