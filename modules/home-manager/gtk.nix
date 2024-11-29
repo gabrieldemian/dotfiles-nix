@@ -4,14 +4,8 @@
   lib,
   ...
 }:
-with lib; let
-  cfg = config.gtkk;
-in {
-  options.gtkk = {
-    enable = mkEnableOption "enable gtk module";
-  };
-
-  config = mkIf cfg.enable {
+  {
+  config = {
     gtk = {
       enable = true;
       theme = {

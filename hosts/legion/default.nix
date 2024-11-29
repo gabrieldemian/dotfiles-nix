@@ -11,6 +11,9 @@
     (map configLib.relativeToRoot [
       "common/core"
 
+      # home stuff of users are not loaded by core
+      "home/gabriel/legion.nix"
+
       # programs that this host will have
       # without any user configuration
 

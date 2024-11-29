@@ -4,12 +4,11 @@
   lib,
   pkgs,
   outputs,
-  configLib,
   ...
 }:
 {
   # import everything from curr dir
-  imports = (configLib.scanPaths ./.) ++ (builtins.attrValues outputs.homeManagerModules);
+  imports = builtins.attrValues outputs.homeManagerModules;
 
   services.ssh-agent.enable = true;
 
