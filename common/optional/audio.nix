@@ -14,12 +14,11 @@
     # media-session.enable = true;
   };
 
-  # environment.systemPackages = builtins.attrValues {
-  #   inherit
-  #     (pkgs)
-  #     playerctl # cli utility and lib for controlling media players
-  #     # pamixer # cli pulseaudio sound mixer
-  #
-  #     ;
-  # };
+  environment.systemPackages = builtins.attrValues {
+    inherit (pkgs)
+      # playerctl # cli utility and lib for controlling media players
+      # pamixer # cli pulseaudio sound mixer
+      pwvucontrol
+      ;
+  };
 }

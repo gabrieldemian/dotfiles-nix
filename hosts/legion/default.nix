@@ -67,6 +67,10 @@
 
   programs = {
     light.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
   };
 
   zramSwap = {

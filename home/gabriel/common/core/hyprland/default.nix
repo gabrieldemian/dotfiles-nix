@@ -1,7 +1,7 @@
 { configLib, pkgs, ... }:
 let
   wallpapers = builtins.toString (configLib.relativeToRoot "wallpapers");
-  scripts = builtins.toString (configLib.relativeToRoot "home/gabriel/common/core/hyprland/scripts");
+  scripts = builtins.toString "./scripts";
   wall =
     pkgs.callPackage (configLib.relativeToRoot "home/gabriel/common/core/waybar/scripts/wall.nix")
       { };
@@ -19,7 +19,7 @@ in
 
     settings = {
       monitor = "eDP-1,2560x1600@240,auto,1";
-      exec-once = "dunst & swww-daemon & waybar & ${wall} ${wallpapers}/girl.png &";
+      exec-once = "dunst & swww-daemon & waybar & ${wall} ${wallpapers}/frieren-dark.jpg &";
 
       "$terminal" = "rio";
       "$fileManager" = "rio -e yazi";

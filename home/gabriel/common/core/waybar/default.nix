@@ -347,15 +347,15 @@ in
         };
         "custom/ss" = {
           format = "{}  ";
-          on-click = screenshot;
+          on-click = "${screenshot}/bin/screenshot";
         };
         "custom/select_wallpaper" = {
           format = "{} 󰸉 ";
-          on-click = select_wallpaper;
+          on-click = "${select_wallpaper}/bin/select_wallpaper";
         };
         "custom/cycle_wall" = {
           format = "{}";
-          on-click = cycle_wall;
+          on-click = "${cycle_wall}/bin/cycle_wall";
         };
         "keyboard-state" = {
           numlock = true;

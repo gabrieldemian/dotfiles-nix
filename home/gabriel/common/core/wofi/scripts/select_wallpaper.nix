@@ -38,7 +38,7 @@ let
     }
   '';
 in
-pkgs.writeScriptBin "selected_wallpaper" ''
+pkgs.writeScriptBin "select_wallpaper" ''
   #!/usr/bin/env bash
 
   set -e
@@ -51,7 +51,7 @@ pkgs.writeScriptBin "selected_wallpaper" ''
 
   cd "$dir"
 
-  wallpapers=($(${pkgs.fd}/bin/fd -e png -e jpg -e jpeg -e webp --full-path ''${${wallpapers_dir}}))
+  wallpapers=($(${pkgs.fd}/bin/fd -e png -e jpg -e jpeg -e webp --full-path $dir))
   str=""
 
   for item in "''${wallpapers[@]}" 
@@ -76,7 +76,7 @@ pkgs.writeScriptBin "selected_wallpaper" ''
   done
 
   echo $idx > $TEMP
-  ${wall} "$selected_wallpaper"
+  ${wall}/bin/wall "$selected_wallpaper"
 
   exit 0
 ''

@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  homeDir = config.home.homeDirectory;
+  home_dir = config.home.homeDirectory;
 in
 {
   # Inspiration:
@@ -81,7 +81,7 @@ in
 
             # Misc
             (extension "s3download-statusbar" "{6913849f-c79f-4f3e-83e4-890d91ad6154}")
-            (extension "auto-tab-discard" "{c2c003ee-bd69-42a2-b0e9-6f34222cb046}")
+            # (extension "auto-tab-discard" "{c2c003ee-bd69-42a2-b0e9-6f34222cb046}")
           ]
         )
         // {
@@ -109,7 +109,7 @@ in
         "browser.compactmode.show" = true;
         "browser.uidensity" = 1; # enable compact mode
         "browser.aboutConfig.showWarning" = false;
-        "browser.download.dir" = "${homeDir}/downloads";
+        "browser.download.dir" = "${home_dir}/Downloads";
 
         "browser.tabs.firefox-view" = true; # Sync tabs across devices
         "ui.systemUsesDarkTheme" = 1; # force dark theme
