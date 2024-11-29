@@ -1,14 +1,10 @@
 #
 {
   pkgs,
-  inputs,
   config,
-  lib,
   configLib,
   ...
 }:
-let
-in
 # pubKeys = lib.filesystem.listFilesRecursive ./keys;
 {
   config =
@@ -62,9 +58,9 @@ in
       programs.zsh.enable = true;
       programs.git.enable = true;
 
-      environment.systemPackages = [
-        pkgs.just
-        pkgs.rsync
+      environment.systemPackages = with pkgs; [
+        just
+        rsync
       ];
     };
 }
