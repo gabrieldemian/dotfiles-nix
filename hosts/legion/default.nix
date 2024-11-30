@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
 
     outputs.nixosModules.ledger
+    outputs.nixosModules.docker
 
     (map configLib.relativeToRoot [
       # load users and other things common to all hosts

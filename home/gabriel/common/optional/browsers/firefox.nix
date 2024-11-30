@@ -22,7 +22,7 @@ in
     policies = {
       AppAutoUpdate = false; # Disable automatic application update
       BackgroundAppUpdate = false; # Disable automatic application update in the background, when the application is not running.
-      DefaultDownloadDirectory = "${config.home.homeDirectory}/Downloads";
+      DefaultDownloadDirectory = "${config.home.homeDirectory}/downloads";
       DisableBuiltinPDFViewer = false;
       DisableFirefoxStudies = true;
       DisableFirefoxAccounts = false; # Enable Firefox Sync
@@ -109,7 +109,7 @@ in
         "browser.compactmode.show" = true;
         "browser.uidensity" = 1; # enable compact mode
         "browser.aboutConfig.showWarning" = false;
-        "browser.download.dir" = "${home_dir}/Downloads";
+        "browser.download.dir" = "${home_dir}/downloads";
 
         "browser.tabs.firefox-view" = true; # Sync tabs across devices
         "ui.systemUsesDarkTheme" = 1; # force dark theme

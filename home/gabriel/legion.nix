@@ -1,4 +1,5 @@
 {
+  pkgs,
   ...
 }:
 {
@@ -19,6 +20,10 @@
     ./common/core/yazi
     ./common/core/zsh.nix
     ./common/optional/browsers
+  ];
+
+  home.packages = with pkgs; [
+    cargo
   ];
 
   # nixosModules.battery-notifier.enable = true;

@@ -19,14 +19,15 @@
     stateVersion = lib.mkDefault "23.11";
     sessionPath = [
       "$HOME/.local/bin"
+      "$HOME/.cargo/bin"
     ];
-    sessionVariables = {
-      SHELL = "zsh";
-      TERM = "rio";
-      TERMINAL = "rio";
-      VISUAL = "nvim";
-      EDITOR = "nvim";
-    };
+    # sessionVariables = {
+    #   SHELL = "zsh";
+    #   TERM = "rio";
+    #   TERMINAL = "rio";
+    #   VISUAL = "nvim";
+    #   EDITOR = "nvim";
+    # };
     preferXdgDirectories = true; # whether to make programs use XDG directories whenever supported
   };
 
@@ -66,7 +67,7 @@
       enable = true;
       createDirectories = true;
       desktop = "${config.home.homeDirectory}/.desktop";
-      documents = "${config.home.homeDirectory}/doc";
+      documents = "${config.home.homeDirectory}/documents";
       download = "${config.home.homeDirectory}/downloads";
       music = "${config.home.homeDirectory}/music";
       pictures = "${config.home.homeDirectory}/images";
