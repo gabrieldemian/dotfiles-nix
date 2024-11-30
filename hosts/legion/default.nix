@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   configLib,
   config,
@@ -58,6 +59,7 @@
   };
 
   boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
     blacklistedKernelModules = [ ];
     initrd.kernelModules = [ "nvidia" ];
     loader = {
