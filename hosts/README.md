@@ -1,7 +1,5 @@
 # hosts
 
-## What
-
 A `host` is a machine. Each host define their own configuration for hardware and software, hosts use custom and official packages, modules, etc. 
 
 The host home-manager entrypoint is called `home.nix`.

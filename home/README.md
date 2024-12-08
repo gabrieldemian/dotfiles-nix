@@ -13,7 +13,7 @@ As a user, I want to define my own configuration for my hosts in 2 ways:
 
 ## Core (common config for all hosts)
 
-File/directory: `home/<user>/core`
+File/directory: `home/<user>/common/core`
 
 The core configuration that this user wants to share for ALL of the hosts.
 
@@ -25,7 +25,7 @@ This can include, for example: Env variables, fonts, personal git configs, shell
 
 File: `home/<user>/<host>.nix`
 
-Where `<host>.nix` is the configuration file of this `<user>` for this specific host.
+Where `<host>.nix` declares configuration and packages of this `<user>` for this specific host.
 
 ## Optional
 

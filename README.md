@@ -9,7 +9,7 @@ Still a work in progress.
 ```
  ╭─ wallpapers           -> frieren supremacy
  ├─ flake.nix            -> entry point
- ├─ hosts                -> machines (only one called "nixos" which is my legion laptop with nvidia)
+ ├─ hosts                -> machines (only one so far "legion")
  ├─ common               -> everything that is shared between hosts, users, programs, etc.
  ├─ pkgs                 -> custom pkgs/derivations
  ├─ fonts                -> source of obscure fonts that I couldn't find on nixpkgs
@@ -22,16 +22,10 @@ Still a work in progress.
 ## Main host (legion)
 ```
  ╭─ distro     -> nixos
- ├─ editor     -> neovim
- ╰─ shell      -> zsh
- ╭─ model      -> LENOVO LNVNB161216
+ ├─ model      -> LENOVO LNVNB161216
  ├─ CPU        -> 13th Gen Intel i9-13900HX (8) @ 5.400GHz
  ├─ GPU        -> NVIDIA GeForce RTX 4070
  ╰─ resolution -> 2560x1600@244hz
- ╭─ WM         -> hyprland
- ├─ terminal   -> kitty
- ├─ theme      -> catppuccin-macchiato
- ╰─ icons      -> papirus-dark
 ```
 
 ## Preview
