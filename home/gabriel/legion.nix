@@ -24,6 +24,8 @@
 
   home.packages = with pkgs; [
     cargo
+    goxel
+    zathura
   ];
 
   # nixosModules.battery-notifier.enable = true;
