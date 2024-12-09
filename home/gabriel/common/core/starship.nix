@@ -78,12 +78,12 @@
         format = "(bold fg:mauve)[$path ]($style)(bold fg:mauve)";
       };
       directory.substitutions = {
-        "Desktop" = "  ";
-        "Documents" = "  ";
-        "Downloads" = "  ";
-        "Music" = " 󰎈 ";
-        "Pictures" = "  ";
-        "Videos" = "  ";
+        "desktop" = "  ";
+        "documents" = "  ";
+        "downloads" = "  ";
+        "music" = " 󰎈 ";
+        "images" = "  ";
+        "videos" = "  ";
       };
       cmd_duration = {
         min_time = 0;

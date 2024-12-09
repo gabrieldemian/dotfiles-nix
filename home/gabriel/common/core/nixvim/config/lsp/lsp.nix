@@ -26,6 +26,12 @@
   config.programs.nixvim.plugins.lsp = {
     enable = true;
     servers = {
+      cssls = {
+        enable = true;
+      };
+      tailwindcss = {
+        enable = true;
+      };
       solc = {
         enable = false;
       };
