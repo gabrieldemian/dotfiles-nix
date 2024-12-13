@@ -22,7 +22,7 @@
 
       # "common/optional/services/openssh.nix" # allow remote SSH access
       "common/optional/audio.nix" # pipewire and cli controls
-      # "common/optional/gaming.nix" # steam, gamescope, gamemode, and related hardware
+      "common/optional/gaming.nix" # steam, gamescope, gamemode, and related hardware
 
       "common/optional/hyprland.nix" # window manager
       "common/optional/wayland.nix" # wayland components and pkgs not available in home-manager

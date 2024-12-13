@@ -26,6 +26,9 @@
     cargo
     goxel
     zathura
+    ani-cli
+    transmission_4-gtk
+    webtorrent_desktop
   ];
 
   # nixosModules.battery-notifier.enable = true;
